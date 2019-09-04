@@ -1,0 +1,47 @@
+[core]
+    editor = vim
+    excludesfile = ~/.gitignore
+    #pager = "less -rS"
+[color]
+    ui = true
+    hist = true
+[user]
+    name = Dmitry Voytik
+    email = voytikd@gmail.com
+[log]
+    decorate = short
+[alias]
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    lga = log --all --pretty=format:\"%C(red bold)%h%Creset %ad %C(blue dim)%an%Creset %C(bold)%s%Creset%C(yellow)%d\" --graph --date=short
+    lg = log --pretty=format:\"%C(red bold)%h%Creset %ad %C(blue dim)%an%Creset %C(bold)%s%Creset%C(yellow)%d\" --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p
+    dc = diff --cached
+
+[sendemail]
+    #smtpserver = smtp.gmail.com
+    #smtpuser = voytikd@gmail.com
+    #smtppass = ""
+    smtpssl = true
+    # hack to replace from
+    #from = voytikd@gmail.com
+[pull]
+    rebase = true
+
+[pager]
+    #log = diff-highlight | less
+    #show = diff-highlight | less
+    #diff = diff-highlight | less
+
+[color "diff"]
+    meta = magenta bold
+    #meta = red bold
+[diff]
+    tool = vimdiff
+    renameLimit = 2000
+[mergetool]
+    # controls if difftool asks to run vimdiff for each file:
+    #prompt = false
