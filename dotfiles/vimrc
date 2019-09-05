@@ -2,7 +2,7 @@
 set nocompatible
 
 " set a directory for swap files:
-set dir=~/tmp
+set dir=~/.tmp
 
 " macos workaround
 set backspace=indent,eol,start
