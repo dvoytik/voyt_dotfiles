@@ -139,6 +139,7 @@ nnoremap ,p :r! cat /tmp/vitmp<CR>
 nnoremap ZF :update<CR>
 " save file and run make
 nnoremap ZC :update<CR>:make<CR>
+nnoremap ZR :update<CR>:make run<CR><CR><CR>
 
 " highligh all lines more than 80 characters
 noremap ,l :let w:m2=matchadd('Search', '\%>80v.\+', -1) <CR>
