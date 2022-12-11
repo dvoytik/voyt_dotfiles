@@ -2,6 +2,7 @@
 set -x PATH /usr/local/bin $PATH
 set -x PATH $PATH ~/.bin/
 set -x PATH $PATH ~/.cargo/bin/
+set -x PATH $PATH ~/.bin/riscv64-unknown-elf-toolchain-10.2.0-2020.12.8-x86_64-apple-darwin/bin
 
 export LC_ALL=en_US.UTF-8
 
@@ -18,3 +19,5 @@ alias gam='git commit --ammend'
 alias gap='clear; git add -p'
 
 alias t='tree . | vim -'
+
+alias llt="ls -ltrh"
