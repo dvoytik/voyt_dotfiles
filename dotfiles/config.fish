@@ -1,4 +1,7 @@
 
+if status is-interactive
+# Commands to run in interactive sessions can go here
+
 set -x PATH /usr/local/bin $PATH
 set -x PATH $PATH ~/.bin/
 set -x PATH $PATH ~/.cargo/bin/
@@ -21,3 +24,8 @@ alias gap='clear; git add -p'
 alias t='tree . | vim -'
 
 alias llt="ls -ltrh"
+
+
+starship init fish | source
+
+end
