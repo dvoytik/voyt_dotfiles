@@ -8,6 +8,8 @@ function install_packages() {
     tmux \
     fish \
     neovim \
+    ripgrep \
+    fdfind \
     tree \
     htop \
     tlp \
@@ -15,7 +17,9 @@ function install_packages() {
     vlc \
     gimp
 
-  sudo snap instal starship
+  sudo snap instal \
+    starship \
+    btop
 }
 
 function install_setup_keyd() {
@@ -39,6 +43,7 @@ function setup_fish_shell() {
   test -f ~/.config/fish/config.fish && echo "ERROR: config.fish exists" && exit
   mkdir -p ~/.config/fish/
   ln -s $PWD/dotfiles/config.fish  ~/.config/fish/
+  chsh -s /usr/bin/fish
 }
 
 function setup_starship() {
@@ -84,12 +89,46 @@ function setup_fonts() {
 
 function setup_rust() {
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  rustup component add rust-analyzer
+  ln -s $(rustup which --toolchain stable rust-analyzer) ~/.cargo/bin
 }
 
-function setup_alarcity() {
-  echo
+function setup_alacritty() {
+  sudo apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev \
+                   libxcb-xfixes0-dev libxkbcommon-dev python3
+  cd ~/p
+  git clone https://github.com/alacritty/alacritty.git
+  cd alacritty
+  cargo build --release --no-default-features --features=wayland
+  sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
+  sudo cp target/release/alacritty /usr/local/bin
+  sudo cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
+  sudo desktop-file-install extra/linux/Alacritty.desktop
+  sudo update-desktop-database
+  sudo mkdir -p /usr/local/share/man/man1
+  gzip -c extra/alacritty.man | sudo tee /usr/local/share/man/man1/alacritty.1.gz > /dev/null
+  gzip -c extra/alacritty-msg.man | \
+    sudo tee /usr/local/share/man/man1/alacritty-msg.1.gz > /dev/null
+
+  mkdir -p $HOME/.config/fish/completions/
+  cp extra/completions/alacritty.fish $HOME/.config/fish/completions/alacritty.fish
+
+  mkdir -p $HOME/.config/alacritty/
+  ln -s $PWD/dotfiles/alacritty.yml $HOME/.config/alacritty/alacritty.yml
 }
 
+function install_setup_wezterm() {
+  set -ex
+  cd /tmp
+  git clone --depth=1 --branch=main --recursive \
+    https://github.com/wez/wezterm.git
+  cd wezterm
+  git submodule update --init --recursive
+  ./get-deps
+  cargo build --release
+  #cargo run --release --bin wezterm -- start
+  set +ex
+}
 #install_setup_keyd
 #install_packages
 #setup_tmux
@@ -100,3 +139,5 @@ function setup_alarcity() {
 #setup_tlp
 #setup_rust
 #setup_gnome_terminal
+#setup_alacritty
+#install_setup_wezterm
