@@ -22,11 +22,13 @@ alias ga='git add'
 alias gam='git commit --ammend'
 alias gap='clear; git add -p'
 
-alias t='tree . | vim -'
-
+alias ll='exa -l'
+alias t='exa --tree'
+alias tree='exa --tree'
 alias llt="ls -ltrh"
 
 
 starship init fish | source
+zoxide init fish | source
 
 end

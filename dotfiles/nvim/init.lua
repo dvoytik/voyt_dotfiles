@@ -5,6 +5,7 @@
 require("my_packer")
 require("my_rust")
 
+vim.g.mapleader = " "
 -- number of visual spaces per tab
 vim.o.tabstop = 4
 -- number of indent using >> and <<
@@ -20,15 +21,22 @@ vim.o.wrap = false
 -- <tab>/<BS> indent/dedent in leading whitespace
 vim.o.smarttab = true
 vim.o.smartindent = true
--- ignore case
+-- ignore case when searching
 vim.o.ignorecase = true
 -- case insensitive, except when using uppercase chars
 vim.o.smartcase = true
 vim.o.number = true
+vim.o.relativenumber = true
 vim.opt.colorcolumn = "80"
 -- Automatically insert \n when blank is inserted
 -- vim.opt.textwidth = 80
 vim.o.wrap = true
+-- have a fixed column for the diagnostics to appear in
+-- this removes the jitter when warnings/errors flow in
+vim.wo.signcolumn = "yes"
+-- TODO:
+-- undofile
+--
 
 
 -- Set completeopt to have a better completion experience
@@ -81,9 +89,6 @@ vim.o.termguicolors = true
 -- color scheme
 vim.cmd("colorscheme nord")
 
--- have a fixed column for the diagnostics to appear in
--- this removes the jitter when warnings/errors flow in
-vim.wo.signcolumn = "yes"
 
 -- Telescope hot keys
 local builtin = require('telescope.builtin')

@@ -16,6 +16,7 @@ require("packer").startup(function(use)
 
   -- Packer can manage itself
   use("wbthomason/packer.nvim")
+  use("nvim-treesitter/nvim-treesitter")
   -- Collection of common configurations for the Nvim LSP client
   use("neovim/nvim-lspconfig")
   -- Visualize lsp progress

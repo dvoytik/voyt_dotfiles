@@ -7,17 +7,20 @@ function install_packages() {
     git \
     tmux \
     fish \
-    neovim \
     ripgrep \
     fdfind \
     tree \
     htop \
+    exa \
+    zoxide \
+    fzf \
     tlp \
     tlp-rdw \
     vlc \
     gimp
 
   sudo snap instal \
+    neovim \
     starship \
     btop
 }
