@@ -153,6 +153,7 @@ function setup_nvim_astronvim() {
   #install_lazygit
 
   git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+  ln -s $PWD/dotfiles/astronvim_user ~/.config/nvim/lua/user
   nvim +PackerSync
 }
 
