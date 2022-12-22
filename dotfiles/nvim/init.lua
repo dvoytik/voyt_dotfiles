@@ -28,6 +28,7 @@ vim.o.smartcase = true
 vim.o.number = true
 vim.o.relativenumber = true
 vim.opt.colorcolumn = "80"
+vim.opt.cursorline = true
 -- Automatically insert \n when blank is inserted
 -- vim.opt.textwidth = 80
 vim.o.wrap = true

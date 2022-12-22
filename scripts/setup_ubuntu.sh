@@ -14,6 +14,7 @@ function install_packages() {
     exa \
     zoxide \
     fzf \
+    gdu \
     tlp \
     tlp-rdw \
     vlc \
@@ -59,7 +60,7 @@ function setup_tlp() {
   sudo systemctl status tlp
 }
 
-function ssetup_nvim() {
+function setup_nvim_my_config() {
   mkdir -p ~/.config/
   ln -s $PWD/dotfiles/nvim  ~/.config/
 }
@@ -132,15 +133,40 @@ function install_setup_wezterm() {
   #cargo run --release --bin wezterm -- start
   set +ex
 }
+
+function install_lazygit() {
+  cd /tmp
+  LAZYGIT_VERSION="0.36.0"
+  curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+
+  sudo tar xf lazygit.tar.gz -C /usr/local/bin lazygit
+
+  #mkdir -p ~/.config/
+  #ln -s $PWD/dotfiles/nvim  ~/.config/
+}
+
+function setup_nvim_astronvim() {
+  test -d ~/.config/nvim && echo "ERROR: back up nvim config!" && exit
+  #mv ~/.local/share/nvim/ ~/.local/share/nvim_BAK_$(date +%Y%m%d)
+  #mv ~/.confi/nvim/ ~/.config/nvim_BAK_$(date +%Y%m%d)
+  cargo install tree-sitter-cli
+  #install_lazygit
+
+  git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+  nvim +PackerSync
+}
+
 #install_setup_keyd
 #install_packages
 #setup_tmux
 #setup_fish_shell
 #setup_starship
-#ssetup_nvim
+#setup_nvim_my_config
 #setup_fonts
 #setup_tlp
 #setup_rust
 #setup_gnome_terminal
 #setup_alacritty
 #install_setup_wezterm
+#setup_nvim_astronvim
+#install_lazygit
