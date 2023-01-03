@@ -2,26 +2,35 @@
 
 # vim: expandtab shiftwidth=2
 
+function backup_file() {
+  f=$1
+  test -f $f && echo "WARNING: $f exists. Backing up..." \
+    && mv $f ${f}_$(date +%y%m%d_%H%M)
+}
+
 function install_packages() {
+  sudo apt update
   sudo apt install \
     git \
     tmux \
     fish \
     ripgrep \
-    fdfind \
+    fd-find \
     tree \
     htop \
     exa \
     zoxide \
     fzf \
     gdu \
-    tlp \
-    tlp-rdw \
     vlc \
     gimp
+  # gcc cmake g++ pkg-config \
+  # for laptop:
+    #tlp \
+    #tlp-rdw
 
-  sudo snap instal \
-    neovim \
+  sudo snap install --classic nvim
+  sudo snap install \
     starship \
     btop
 }
@@ -39,18 +48,20 @@ function install_setup_keyd() {
 }
 
 function setup_tmux() {
-  test -f ~/.tmux.conf && echo "ERROR: tmux.conf exists" && exit
+  backup_file $HOME/.tmux.conf
   ln -s $PWD/dotfiles/tmux.conf ~/.tmux.conf
 }
 
 function setup_fish_shell() {
-  test -f ~/.config/fish/config.fish && echo "ERROR: config.fish exists" && exit
+  backup_file $HOME/.config/fish/config.fish
   mkdir -p ~/.config/fish/
   ln -s $PWD/dotfiles/config.fish  ~/.config/fish/
+  echo "Changing default shell"
   chsh -s /usr/bin/fish
 }
 
 function setup_starship() {
+  backup_file $HOME/.config/starship.toml
   ln -s $PWD/dotfiles/starship.toml ~/.config/
 }
 
@@ -81,7 +92,7 @@ function setup_gnome_terminal() {
   gsettings set org.gnome.desktop.peripherals.keyboard delay 200
 }
 
-function setup_fonts() {
+function install_fonts() {
   cd /tmp
   mkdir -p c && cd c
   wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/CascadiaCode.zip
@@ -97,12 +108,13 @@ function setup_rust() {
   ln -s $(rustup which --toolchain stable rust-analyzer) ~/.cargo/bin
 }
 
-function setup_alacritty() {
-  sudo apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev \
+function install_alacritty() {
+  cargo >/dev/null || echo "ERROR: cargo is not installed" || exit
+  sudo apt install gcc g++ cmake pkg-config libfreetype6-dev libfontconfig1-dev \
                    libxcb-xfixes0-dev libxkbcommon-dev python3
   cd ~/p
   git clone https://github.com/alacritty/alacritty.git
-  cd alacritty
+  pushd alacritty
   cargo build --release --no-default-features --features=wayland
   sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
   sudo cp target/release/alacritty /usr/local/bin
@@ -117,6 +129,10 @@ function setup_alacritty() {
   mkdir -p $HOME/.config/fish/completions/
   cp extra/completions/alacritty.fish $HOME/.config/fish/completions/alacritty.fish
 
+  popd
+}
+
+function setup_alacritty() {
   mkdir -p $HOME/.config/alacritty/
   ln -s $PWD/dotfiles/alacritty.yml $HOME/.config/alacritty/alacritty.yml
 }
@@ -157,17 +173,25 @@ function setup_nvim_astronvim() {
   nvim +PackerSync
 }
 
-#install_setup_keyd
+function setup_git() {
+  backup_file $HOME/.gitconfig
+  ln -s $PWD/dotfiles/gitconfig $HOME/.gitconfig
+}
+
+
 #install_packages
+#install_fonts
+#setup_rust
+#install_alacritty
+#setup_alacritty
+#install_setup_keyd
 #setup_tmux
 #setup_fish_shell
 #setup_starship
 #setup_nvim_my_config
-#setup_fonts
 #setup_tlp
-#setup_rust
 #setup_gnome_terminal
-#setup_alacritty
 #install_setup_wezterm
 #setup_nvim_astronvim
 #install_lazygit
+#setup_git
