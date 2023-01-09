@@ -20,6 +20,7 @@ function install_packages() {
     htop \
     exa \
     zoxide \
+    ncal \
     fzf \
     gdu \
     vlc \
@@ -179,8 +180,8 @@ function setup_git() {
 }
 
 
-#install_packages
 #install_fonts
+#install_packages
 #setup_rust
 #install_alacritty
 #setup_alacritty

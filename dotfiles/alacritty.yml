@@ -2,11 +2,13 @@ window:
   columns: 160
   lines: 100
   startup_mode: Fullscreen
+  opacity: 0.8
 scrolling:
   history: 0
 
+
 font:
-  size: 14
+  size: 18
   normal:
     family: CaskaydiaCove Nerd Font
     style: Regular

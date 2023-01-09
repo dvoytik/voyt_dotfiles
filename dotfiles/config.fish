@@ -31,6 +31,7 @@ alias t='exa --tree'
 alias tree='exa --tree'
 alias llt="ls -ltrh"
 
+alias cal="ncal -w -s DE -M"
 
 starship init fish | source
 zoxide init fish | source
