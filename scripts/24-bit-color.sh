@@ -54,6 +54,15 @@ rainbowColor()
 }
 
 for i in `seq 0 127`; do
+	echo -en $(($i % 100 / 10))
+done
+echo
+for i in `seq 0 127`; do
+	echo -en $(($i % 10))
+done
+echo
+
+for i in `seq 0 127`; do
     setBackgroundColor $i 0 0
     echo -en " "
 done

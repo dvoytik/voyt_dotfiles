@@ -8,6 +8,14 @@ function backup_file() {
     && mv $f ${f}_$(date +%y%m%d_%H%M)
 }
 
+function backup_dir() {
+  d=$1
+  new_dir=${d}_$(date +%y%m%d_%H%M)
+  test -d $d && echo "WARNING: $d exists. Backing up to $new_dir ..." \
+    && mv $f $new_dir
+}
+
+
 function install_packages() {
   sudo apt update
   sudo apt install \
@@ -163,7 +171,7 @@ function install_lazygit() {
 }
 
 function setup_nvim_astronvim() {
-  test -d ~/.config/nvim && echo "ERROR: back up nvim config!" && exit
+  backup_dir ~/.config/nvim
   #mv ~/.local/share/nvim/ ~/.local/share/nvim_BAK_$(date +%Y%m%d)
   #mv ~/.confi/nvim/ ~/.config/nvim_BAK_$(date +%Y%m%d)
   cargo install tree-sitter-cli

@@ -52,7 +52,7 @@ disabled = true
 
 # You can also replace your username with a neat symbol like  to save some space
 [username]
-show_always = false
+show_always = true
 style_user = "bold bg:#9A348E fg:#FFF27D"
 style_root = "bg:#9A348E fg:#AAF27D"
 format = '[$user]($style)'
