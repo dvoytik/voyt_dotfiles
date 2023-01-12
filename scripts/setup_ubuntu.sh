@@ -187,6 +187,40 @@ function setup_git() {
   ln -s $PWD/dotfiles/gitconfig $HOME/.gitconfig
 }
 
+function install_sway() {
+  #backup_dir $HOME/.config/sway/
+  sudo apt install --no-install-recommends sway \
+    sway \
+    swaybg \
+    swayidle \
+    sway-backgrounds \
+    swaylock \
+    wl-clipboard \
+    xdg-desktop-portal-wlr \
+    wofi \
+    waybar fonts-font-awesome \
+    mako-notifier \
+    pulseaudio-utils
+
+}
+
+function setup_sway() {
+  backup_dir ~/.config/sway
+  ln -s $PWD/dotfiles/sway/ $HOME/.config/sway
+
+  backup_dir ~/.config/waybar
+  ln -s $PWD/dotfiles/waybar $HOME/.config/waybar
+}
+
+# Manually install:
+# * mouseless key navigator in browsers:
+#   * Surfingkey
+#   * vimium
+
+# TODO:
+# https://github.com/rvaiya/warpd
+# feh - wallpaper
+# https://github.com/qutebrowser/qutebrowser
 
 #install_fonts
 #install_packages
@@ -204,3 +238,4 @@ function setup_git() {
 #setup_nvim_astronvim
 #install_lazygit
 #setup_git
+#install_sway
