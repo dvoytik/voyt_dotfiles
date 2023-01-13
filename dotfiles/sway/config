@@ -9,13 +9,24 @@
 # exec_always xrdb -load ~/.Xresources
 # xwayland enable
 
+# Hide cursor
+seat seat0 hide_cursor 5000
+
 font pango: CaskaydiaCove Nerd Font 18
 
 gaps inner 10
 gaps outer 0
 
+# no gaps when single window:
+smart_gaps on
+
 default_border pixel 2
 
+# keyboard layout
+input type:keyboard {
+    xkb_layout us,ru
+    xkb_options grp:alt_shift_toggle
+}
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -29,28 +40,6 @@ set $right l
 # My preferred terminal emulator
 set $term alacritty
 set $browser brave-browser
-
-####################################################################################################
-# Autostart
-#
-# Peripherals
-#exec light -S 20
-#exec obhud --touchpad off -c sway.conf
-#exec redshift -m wayland -l 52.25:22.12
-
-# set sound volume to 50%
-exec pactl set-sink-volume @DEFAULT_SINK@ 50%
-
-# Network manager
-exec nm-applet
-# Notifications
-exec mako --icons 1 --markup 1 --actions 1 --padding 10 --background-color "#81a1c1" --default-timeout 10000
-#exec autotiling
-# Workaround to run Java swing (broken) applications (e.g. IntelliJ)
-#exec wmname LG3D
-# Authentication
-#exec lxpolkit
-#exec gnome-keyring-daemon --start -bindsym-components=pkcs11
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -73,12 +62,10 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 
 ### Idle configuration
 #
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-#          before-sleep 'swaylock -f -c 000000'
+exec swayidle -w \
+         timeout 300 'swaylock -f -c 000000' \
+         timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+         before-sleep 'swaylock -f -c 000000'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -241,6 +228,7 @@ bindsym $mod+r mode "resize"
 bindsym $mod+n exec makoctl dismiss
 bindsym $mod+Shift+n exec makoctl dismiss -a
 
+####################################################################################################
 #
 # Status Bar:
 #
@@ -254,3 +242,31 @@ bar {
 #exec hash dbus-update-activation-environment 2>/dev/null && \
 #        dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 include /etc/sway/config.d/*
+
+####################################################################################################
+# Autostart
+#
+# Peripherals
+#exec light -S 20
+#exec obhud --touchpad off -c sway.conf
+#exec redshift -m wayland -l 52.25:22.12
+
+# set sound volume to 50%
+exec pactl set-sink-volume @DEFAULT_SINK@ 50%
+
+# Network manager
+exec nm-applet
+# Notifications
+exec mako --icons 1 --markup 1 --actions 1 --padding 10 --background-color "#81a1c1" --default-timeout 10000
+#exec autotiling
+# Workaround to run Java swing (broken) applications (e.g. IntelliJ)
+#exec wmname LG3D
+# Authentication
+#exec lxpolkit
+#exec gnome-keyring-daemon --start -bindsym-components=pkcs11
+
+exec swaymsg "workspace 1; exec brave-browser --restore-last-session;"
+exec swaymsg "workspace 1; exec $term;"
+#exec swaymsg "workspace 2; exec $term; workspace 1"
+
+####################################################################################################

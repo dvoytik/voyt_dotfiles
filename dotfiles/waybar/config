@@ -19,8 +19,8 @@
         "sway/language",
         "battery",
         "battery#bat2",
-        "clock",
-        "tray"
+        "tray",
+        "clock"
     ],
     // Modules configuration
     "sway/workspaces": {
