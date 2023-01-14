@@ -45,6 +45,9 @@ function install_packages() {
 }
 
 function install_setup_keyd() {
+  # laptop keyboard
+  #sudo cp dotfiles/keyd.conf /etc/keyd/default.conf
+  # kinesis
   sudo cp dotfiles/keyd.conf /etc/keyd/default.conf
   set -ex
   sudo apt install gcc make

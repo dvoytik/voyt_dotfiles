@@ -266,7 +266,7 @@ exec mako --icons 1 --markup 1 --actions 1 --padding 10 --background-color "#81a
 #exec gnome-keyring-daemon --start -bindsym-components=pkcs11
 
 exec swaymsg "workspace 1; exec brave-browser --restore-last-session;"
-exec swaymsg "workspace 1; exec $term;"
+exec swaymsg "workspace 1; exec $term -e tmux attach;"
 #exec swaymsg "workspace 2; exec $term; workspace 1"
 
 ####################################################################################################

@@ -1,0 +1,13 @@
+[ids]
+*
+
+[main]
+
+#capslock = overload(control, esc)
+insert = S-insert
+
+# remap key "<>|" to "`~"
+#102nd = `
+
+# remap end to "Windows" key aka Mod4 aka leftmeta
+end = layer(meta)

@@ -255,6 +255,14 @@ local config = {
       }
       return config -- return final config table
     end,
+    -- override default Bufferline options
+    ["bufferline"] = function(config)
+      -- config variable is the default configuration table for the setup function call
+      config.options.max_name_length = 40; -- default is 14
+      config.options.separator_style = "slant"; -- default is "thin"
+      return config
+    end,
+    --
     treesitter = { -- overrides `require("treesitter").setup(...)`
       -- ensure_installed = { "lua" },
     },
