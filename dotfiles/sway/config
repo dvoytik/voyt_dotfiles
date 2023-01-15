@@ -224,9 +224,6 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# Mako
-bindsym $mod+n exec makoctl dismiss
-bindsym $mod+Shift+n exec makoctl dismiss -a
 
 ####################################################################################################
 #
@@ -254,8 +251,6 @@ include /etc/sway/config.d/*
 # set sound volume to 50%
 exec pactl set-sink-volume @DEFAULT_SINK@ 50%
 
-# Notifications
-exec mako --icons 1 --markup 1 --actions 1 --padding 10 --background-color "#81a1c1" --default-timeout 10000
 # Network manager
 exec nm-applet
 # Bluetooth
@@ -273,11 +268,22 @@ exec swaymsg "workspace 1; exec $term -e tmux attach;"
 #exec swaymsg "workspace 2; exec $term; workspace 1"
 
 ####################################################################################################
+# Notifications
+exec mako --icons 1 --markup 1 --actions 1 --padding 10 --background-color "#81a1c1" --default-timeout 10000
+# Mako
+bindsym $mod+n exec makoctl dismiss
+bindsym $mod+Shift+n exec makoctl dismiss -a
+####################################################################################################
 # Workarounds
 # brave-browser --new-window --app=https://youtube.com uses keyboard inhibitor protocol
 # disable this otherwise sway hotkeys don't work
 for_window [app_id="^chrome-.*"] shortcuts_inhibitor disable
 for_window [app_id="^brave-.*"] shortcuts_inhibitor disable
 ####################################################################################################
+# Clapboard - remember clipboard
+# sit in background and store copied text
+exec wl-paste --watch bash -c "xargs -0 -I{} clapboard store {}"
+exec wl-paste -p --watch bash -c "xargs -0 -I{} clapboard store {}"
 
+bindsym $mod+c exec clapboard
 ####################################################################################################

@@ -235,6 +235,17 @@ function install_swappy() {
   ninja -C build
   ninja -C build
   sudo ninja -C build install
+  popd
+}
+
+function install_clapboard() {
+  pushd /tmp
+  git clone https://github.com/bjesus/clapboard.git
+  pushd clapboard
+  cargo build --release
+  sudo cp target/release/clapboard /usr/local/bin/
+
+  ln -s $PWD/dotfiles/clapboard ~/.config/clapboard
 }
 
 # Manually install:
@@ -265,3 +276,4 @@ function install_swappy() {
 #setup_git
 #install_sway
 #install_swappy
+#install_clapboard

@@ -1,0 +1,6 @@
+launcher = [ "wofi", "--dmenu", "" ]
+history_size = 50
+
+[favorites]
+# You can add your favorite clipboard pastes here like this:
+# "some key" = "some value"
