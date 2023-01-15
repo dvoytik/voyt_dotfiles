@@ -9,7 +9,7 @@
 # exec_always xrdb -load ~/.Xresources
 # xwayland enable
 
-# Hide cursor
+# Hide cursor after 5 seconds
 seat seat0 hide_cursor 5000
 
 font pango: CaskaydiaCove Nerd Font 18
