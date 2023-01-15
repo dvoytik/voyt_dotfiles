@@ -254,10 +254,12 @@ include /etc/sway/config.d/*
 # set sound volume to 50%
 exec pactl set-sink-volume @DEFAULT_SINK@ 50%
 
-# Network manager
-exec nm-applet
 # Notifications
 exec mako --icons 1 --markup 1 --actions 1 --padding 10 --background-color "#81a1c1" --default-timeout 10000
+# Network manager
+exec nm-applet
+# Bluetooth
+exec blueman-applet
 #exec autotiling
 # Workaround to run Java swing (broken) applications (e.g. IntelliJ)
 #exec wmname LG3D
@@ -267,6 +269,15 @@ exec mako --icons 1 --markup 1 --actions 1 --padding 10 --background-color "#81a
 
 exec swaymsg "workspace 1; exec brave-browser --restore-last-session;"
 exec swaymsg "workspace 1; exec $term -e tmux attach;"
+#exec swaymsg "workspace 4; brave-browser --new-window --app=slack.com; workspace 1"
 #exec swaymsg "workspace 2; exec $term; workspace 1"
+
+####################################################################################################
+# Workarounds
+# brave-browser --new-window --app=https://youtube.com uses keyboard inhibitor protocol
+# disable this otherwise sway hotkeys don't work
+for_window [app_id="^chrome-.*"] shortcuts_inhibitor disable
+for_window [app_id="^brave-.*"] shortcuts_inhibitor disable
+####################################################################################################
 
 ####################################################################################################

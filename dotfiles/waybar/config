@@ -9,11 +9,12 @@
     "modules-center": ["sway/window"],
     "modules-right": [
         "idle_inhibitor",
+        "custom/grimshot",
         "pulseaudio",
         "network",
         "cpu",
-        "memory",
         "temperature",
+        "memory",
         "backlight",
         "keyboard-state",
         "sway/language",
@@ -34,8 +35,18 @@
            "4": " ",
            "5": " ",
            "urgent": " ",
-           "focused": " ",
-           "default": " "
+           //"focused": " ",
+           //"default": " "
+       },
+       "persistent_workspaces": {
+           "2": [],
+           "3": [],
+           "4": [],
+           "5": [],
+           "6": [],
+           "7": [],
+           "8": [],
+           "9": [],
        }
     },
     "keyboard-state": {
@@ -101,7 +112,7 @@
     },
     "temperature": {
         // "thermal-zone": 2,
-        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
         "format": "{temperatureC}°C {icon}",
@@ -131,7 +142,7 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-wifi": "{essid} ({signalStrength}%)  ",
         "format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
@@ -168,6 +179,14 @@
         "escape": true,
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    }
+    },
+    // Screen shot button:
+    "custom/grimshot": {
+        "format": " ",
+        "tooltip": false,
+        "on-click": "grimshot --notify save output - | swappy -f -",
+        "on-click-middle": "grimshot --notify save window - | swappy -f -",
+        "on-click-right": "grimshot --notify save area - | swappy -f -"
+    },
 }
 

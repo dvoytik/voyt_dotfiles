@@ -31,6 +31,7 @@ function install_packages() {
     ncal \
     fzf \
     gdu \
+    blueman \
     vlc \
     gimp
   # gcc cmake g++ pkg-config \
@@ -203,8 +204,8 @@ function install_sway() {
     wofi \
     waybar fonts-font-awesome \
     mako-notifier \
-    pulseaudio-utils
-
+    pulseaudio-utils \
+    grimshot slurp
 }
 
 function setup_sway() {
@@ -213,6 +214,27 @@ function setup_sway() {
 
   backup_dir ~/.config/waybar
   ln -s $PWD/dotfiles/waybar $HOME/.config/waybar
+}
+
+function install_code_radio_cli {
+  sudo apt install libasound2-dev libssl-dev
+  cargo install code-radio-cli
+  # run:
+  # code-radio -l # to list radio sources
+  # code-radio -s <radio_id>
+}
+
+# screenshot tool for sway
+function install_swappy() {
+  sudo apt install grimshot slurp build-essential meson libcairo2-dev libpango1.0-dev \
+    libgtk-3-dev scdoc gettext
+  pushd /tmp
+  git clone https://github.com/jtheoof/swappy
+  cd swappy
+  meson setup build
+  ninja -C build
+  ninja -C build
+  sudo ninja -C build install
 }
 
 # Manually install:
@@ -242,3 +264,4 @@ function setup_sway() {
 #install_lazygit
 #setup_git
 #install_sway
+#install_swappy
