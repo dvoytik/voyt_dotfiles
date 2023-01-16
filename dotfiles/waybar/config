@@ -99,9 +99,15 @@
         "spacing": 10
     },
     "clock": {
-        // "timezone": "America/New_York",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "format": "{:%Y-%m-%d  %H:%M}",
+        //"format-alt": "{:%Y-%m-%d}"
+        "on-click": "alacritty -e fish -c 'date +%H:%M; ncal -w -s DE -M -b -y; read'",
+        // uncomment in newer versions:
+        //"today-format": "<span color='#ff6699'><b><u>{%D}</u></b></span>",
+        //"calendar-weeks-pos": "right",
+        //"format-calendar": "<span color='#ecc6d9'><b>{}</b></span>",
+        //"format-calendar-weeks": "<span color='#99ffdd'><b>W{:%U}</b></span>",
+        //"format-calendar-weekdays": "<span color='#ffcc66'><b>{}</b></span>",
     },
     "cpu": {
         "format": "{usage}% ",
