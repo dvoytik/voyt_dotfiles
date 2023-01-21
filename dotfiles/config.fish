@@ -16,8 +16,8 @@ export EDITOR=(which nvim)
 #
 # common aliases
 #
-alias fd="fdfind"
-alias r='vim -R -'
+#alias fd="fdfind"
+alias r='nvim -R -'
 
 alias gdc='clear; git diff --cached'
 alias gd='clear; git diff'

@@ -253,7 +253,7 @@ include /etc/sway/config.d/*
 exec pactl set-sink-volume @DEFAULT_SINK@ 50%
 
 # Network manager
-exec nm-applet
+exec nm-applet --indicator
 # Bluetooth
 exec blueman-applet
 #exec autotiling
