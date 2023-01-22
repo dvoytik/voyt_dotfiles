@@ -13,23 +13,25 @@ set -x PATH $PATH ~/.cargo/bin/
 export LC_ALL=en_US.UTF-8
 export EDITOR=(which nvim)
 
-#
+#############################################################################
 # common aliases
 #
 #alias fd="fdfind"
 alias r='nvim -R -'
 
+# Directory listing
+alias ll='exa -F -l --color=always | less -F -R --use-color'
+alias llt='exa -l -F --sort=modified --color=always | less -F -R --use-color'
+alias tree='exa -F --tree --color=always | less -F -R --use-color'
+alias t=tree
+
+# Git aliases
 alias gdc='clear; git diff --cached'
 alias gd='clear; git diff'
 alias gst='clear; git status'
 alias ga='git add'
 alias gam='git commit --ammend'
 alias gap='clear; git add -p'
-
-alias ll='exa -l'
-alias t='exa --tree'
-alias tree='exa --tree'
-alias llt="ls -ltrh"
 
 alias cal='date +%H:%M; ncal -w -s DE -M -b -y'
 

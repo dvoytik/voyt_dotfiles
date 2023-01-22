@@ -21,15 +21,29 @@ function backup_dir() {
 function install_system_packages() {
   pacman -Syyu
   pacman -S \
+    sudo \
     polkit \
     man-db man-pages \
     wget \
     unzip \
     pkgstats \
     noto-fonts ttf-liberation \
-    libnotify
+    libnotify \
+    pipewire-pulse \
+    pavucontrol \
+    pacman-contrib
 
   # openssh
+}
+
+function arch_system_setup() {
+  sudo systemctl enable fstrim.timer    # send TRIM command to the disks once per week
+  sudo systemctl enable paccache.timer  # clean up package cache once per week
+  # TODO manually:
+# * nmcli device wifi connect <SSID_or_BSSID> password <password>
+# * set paralleld download in /etc/pacman.conf
+# * set up /etc/hosts
+# * secure ssh server: nvim /etc/ssh/sshd_config
 }
   
 function install_user_packages() {
@@ -50,6 +64,7 @@ function install_user_packages() {
     firefox \
     blueman \
     zoxide \
+    vimimv \
     #ncal \
     #fzf \
     #gdu \
@@ -201,14 +216,21 @@ function install_lazygit() {
 
 function setup_nvim_astronvim() {
   backup_dir ~/.config/nvim
-  #mv ~/.local/share/nvim/ ~/.local/share/nvim_BAK_$(date +%Y%m%d)
-  #mv ~/.confi/nvim/ ~/.config/nvim_BAK_$(date +%Y%m%d)
+  set -ex
   cargo install tree-sitter-cli
   #install_lazygit
 
   git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+  pushd ~/.confg/nvim
+  git checkout v2.11.8
   ln -s $PWD/dotfiles/astronvim_user ~/.config/nvim/lua/user
   nvim +PackerSync
+  set +ex
+
+  # Post installation setup in nvim
+  nvim '+AstroUpdate'
+  nvim '+TSInstall rust lua c' # install tree sitter language parsers
+  nvim '+LspInstall rust c' # install laguage server
 }
 
 function setup_git() {
@@ -228,7 +250,8 @@ function install_sway() {
     waybar \
     mako-notifier \
     pulseaudio-utils \
-    slurp
+    slurp \
+    grim
   # TODO:
   #grimshot
     #sway-backgrounds \
@@ -285,6 +308,8 @@ function install_clapboard() {
 # https://github.com/qutebrowser/qutebrowser
 
 #install_system_packages
+#arch_system_setup
+#
 #install_user_packages
 #setup_tmux
 #setup_fish_shell
@@ -296,20 +321,15 @@ function install_clapboard() {
 #install_setup_keyd
 #install_fonts
 #install_rust
+setup_nvim_astronvim
 #
 #install_alacritty
 #setup_nvim_my_config
 #setup_tlp
 #setup_gnome_terminal
 #install_setup_wezterm
-#setup_nvim_astronvim
 #install_lazygit
 #install_swappy
 #install_clapboard
-
-# TODO after install:
-# * nmcli device wifi connect <SSID_or_BSSID> password <password>
-# * set paralleld download in /etc/pacman.conf
-# * set /etc/hosts
-# * systemctl enable fstrim.timer
+#
 #
