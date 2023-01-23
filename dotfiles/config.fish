@@ -21,7 +21,9 @@ alias r='nvim -R -'
 
 # Directory listing
 alias ll='exa -F -l --color=always | less -F -R --use-color'
-alias llt='exa -l -F --sort=modified --color=always | less -F -R --use-color'
+function llt
+    exa -l -F --sort=modified --color=always $argv | less -F -R --use-color
+end
 alias tree='exa -F --tree --color=always | less -F -R --use-color'
 alias t=tree
 

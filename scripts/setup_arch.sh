@@ -241,7 +241,6 @@ function setup_git() {
 function install_sway() {
   pacman -Syu \
     sway \
-    swaybg \
     swayidle \
     swaylock \
     wl-clipboard \
@@ -252,10 +251,6 @@ function install_sway() {
     pulseaudio-utils \
     slurp \
     grim
-  # TODO:
-  #grimshot
-    #sway-backgrounds \
-    #fonts-font-awesome \
 }
 
 function setup_sway() {
@@ -264,6 +259,8 @@ function setup_sway() {
 
   backup_dir ~/.config/waybar
   ln -s $PWD/dotfiles/waybar $HOME/.config/waybar
+
+  sudo cp ./scripts/swaylock.sh /usr/local/bin/
 }
 
 function install_code_radio_cli {

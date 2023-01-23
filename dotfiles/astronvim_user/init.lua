@@ -30,9 +30,9 @@ local config = {
 
   -- Add highlight groups in any theme
   highlights = {
-    -- init = { -- this table overrides highlights in all themes
-    --   Normal = { bg = "#000000" },
-    -- }
+     init = { -- this table overrides highlights in all themes
+       Normal = { bg = "NONE" }, -- NONE means transarent
+     }
     -- duskfox = { -- a table of overrides/changes to the duskfox theme
     --   Normal = { bg = "#000000" },
     -- },
@@ -90,7 +90,7 @@ local config = {
     -- Modify the color palette for the default theme
     colors = {
       fg = "#abb2bf",
-      bg = "#1e222a",
+      bg = "NONE",
     },
     highlights = function(hl) -- or a function that returns a new table of colors to set
       local C = require "default_theme.colors"
@@ -259,7 +259,7 @@ local config = {
     ["bufferline"] = function(config)
       -- config variable is the default configuration table for the setup function call
       config.options.max_name_length = 40; -- default is 14
-      config.options.separator_style = "slant"; -- default is "thin"
+      -- config.options.separator_style = "slant"; -- default is "thin"
       return config
     end,
     --
