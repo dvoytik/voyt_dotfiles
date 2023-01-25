@@ -260,6 +260,9 @@ function setup_sway() {
   backup_dir ~/.config/waybar
   ln -s $PWD/dotfiles/waybar $HOME/.config/waybar
 
+  backup_dir ~/.config/wofi
+  ln -s $PWD/dotfiles/wofi $HOME/.config/wofi
+
   sudo cp ./scripts/swaylock.sh /usr/local/bin/
 }
 
@@ -318,7 +321,8 @@ function install_clapboard() {
 #install_setup_keyd
 #install_fonts
 #install_rust
-setup_nvim_astronvim
+#setup_nvim_astronvim
+#install_code_radio_cli
 #
 #install_alacritty
 #setup_nvim_my_config

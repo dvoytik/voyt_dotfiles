@@ -1,0 +1,3 @@
+allow_images=true
+show=menu
+term=/usr/bin/alacritty

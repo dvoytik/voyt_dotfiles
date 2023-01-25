@@ -113,7 +113,7 @@ local config = {
       cmp = true,
       dashboard = true,
       highlighturl = true,
-      hop = false,
+      hop = true,
       indent_blankline = true,
       lightspeed = false,
       ["neo-tree"] = true,
@@ -206,6 +206,7 @@ local config = {
       ["<leader>bc"] = { "<cmd>BufferLinePickClose<cr>", desc = "Pick to close" },
       ["<leader>bj"] = { "<cmd>BufferLinePick<cr>", desc = "Pick to jump" },
       ["<leader>bt"] = { "<cmd>BufferLineSortByTabs<cr>", desc = "Sort by tabs" },
+      ["<leader>j"] = { "<cmd>HopPatternMW<cr>", desc = "Move cursor to pattern" },
       -- quick save
       -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
     },
@@ -216,6 +217,7 @@ local config = {
   },
 
   -- Configure plugins
+  -- N.B.: Run :PackerSync after changing this table:
   plugins = {
     init = {
       -- You can disable default plugins as follows:
@@ -224,6 +226,14 @@ local config = {
       -- You can also add new plugins here as well:
       -- Add plugins, the packer syntax without the "use"
       -- { "andweeb/presence.nvim" },
+      {
+          "phaazon/hop.nvim",
+          branch = "v2",
+          config = function()
+              -- you can configure Hop the way you like here; see :h hop-config
+              require("hop").setup({ keys = 'etovxqpdygfblzhckisuran', })
+          end,
+      },
       -- {
       --   "ray-x/lsp_signature.nvim",
       --   event = "BufRead",
