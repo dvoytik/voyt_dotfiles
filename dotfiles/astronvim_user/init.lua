@@ -31,8 +31,18 @@ local config = {
   -- Add highlight groups in any theme
   highlights = {
      init = { -- this table overrides highlights in all themes
-       Normal = { bg = "NONE" }, -- NONE means transarent
-     }
+     -- set the transparency for all of these highlight groups
+       Normal = { bg = "NONE", ctermbg = "NONE" }, -- NONE means transparent
+       NormalNC = { bg = "NONE", ctermbg = "NONE" },
+       CursorColumn = { cterm = {}, ctermbg = "NONE", ctermfg = "NONE" },
+       CursorLine = { cterm = {}, ctermbg = "NONE", ctermfg = "NONE" },
+       CursorLineNr = { cterm = {}, ctermbg = "NONE", ctermfg = "NONE" },
+       LineNr = {},
+       SignColumn = {},
+       StatusLine = {},
+       NeoTreeNormal = { bg = "NONE", ctermbg = "NONE" },
+       NeoTreeNormalNC = { bg = "NONE", ctermbg = "NONE" },
+   },
     -- duskfox = { -- a table of overrides/changes to the duskfox theme
     --   Normal = { bg = "#000000" },
     -- },
@@ -264,6 +274,10 @@ local config = {
         -- null_ls.builtins.formatting.prettier,
       }
       return config -- return final config table
+    end,
+    ["notify"] = function(config)
+      config.background_colour = "#000000";
+      return config
     end,
     -- override default Bufferline options
     ["bufferline"] = function(config)

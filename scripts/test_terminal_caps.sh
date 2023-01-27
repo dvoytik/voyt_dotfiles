@@ -106,3 +106,14 @@ for i in `seq 255 128`; do
 done
 resetOutput
 
+echo -e "regualr:     AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz 0123456789"
+echo -e "bold:        \e[1mAaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz 0123456789\e[0m"
+echo -e "italic:      \e[3mAaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz 0123456789\e[0m"
+echo -e "bold italic: \e[3m\e[1mAaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz 0123456789\e[0m"
+
+echo regular
+echo -e "\e[1mbold\e[0m"
+echo -e "\e[3mitalic\e[0m"
+echo -e "\e[3m\e[1mbold italic\e[0m"
+echo -e "\e[4munderline\e[0m"
+echo -e "\e[9mstrikethrough\e[0m"

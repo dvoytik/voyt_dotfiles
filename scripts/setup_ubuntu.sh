@@ -110,7 +110,10 @@ function install_fonts() {
   mkdir -p c && cd c
   wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/CascadiaCode.zip
   unzip CascadiaCode.zip
-  sudo cp 'Caskaydia Cove Nerd Font Complete Regular.otf' /usr/local/share/fonts
+  sudo cp 'Caskaydia Cove Nerd Font Complete Mono Bold.otf' \
+           'Caskaydia Cove Nerd Font Complete Mono Italic.otf' \
+           'Caskaydia Cove Nerd Font Complete Mono Regular.otf' \
+           /usr/local/share/fonts
   cd ..
   rm -rf c CascadiaCode.zip
 }

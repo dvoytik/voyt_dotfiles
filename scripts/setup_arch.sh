@@ -65,6 +65,8 @@ function install_user_packages() {
     blueman \
     zoxide \
     vimimv \
+    cozy-desktop \
+    pass
     #ncal \
     #fzf \
     #gdu \
@@ -143,13 +145,16 @@ function install_paru() {
 }
 
 function install_fonts() {
-  cd /tmp
+  cd /var/tmp
   mkdir -p c && cd c
   wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/CascadiaCode.zip
   unzip CascadiaCode.zip
   exit
   sudo mkdir -p /usr/local/share/fonts/OTF
-  sudo cp 'Caskaydia Cove Nerd Font Complete Regular.otf' /usr/local/share/fonts/OTF
+  sudo cp 'Caskaydia Cove Nerd Font Complete Mono Bold.otf' \
+           'Caskaydia Cove Nerd Font Complete Mono Italic.otf' \
+           'Caskaydia Cove Nerd Font Complete Mono Regular.otf' \
+           /usr/local/share/fonts/OTF
   cd ..
   rm -rf c CascadiaCode.zip
 }
