@@ -45,7 +45,7 @@ set $browser brave-browser
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 #set $menu dmenu_path | dmenu | xargs swaymsg exec --
-set $menu wofi --show run
+set $menu wofi --show
 
 include /etc/sway/config-vars.d/*
 
@@ -97,7 +97,8 @@ exec swayidle -w \
     bindsym $mod+Shift+q kill
 
     # Start your launcher
-    bindsym $mod+d exec $menu
+    bindsym $mod+d exec $menu run
+    bindsym $mod+Shift+d exec $menu drun
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -242,6 +243,29 @@ bar {
 include /etc/sway/config.d/*
 
 ####################################################################################################
+# Notifications
+exec mako --icons 1 --markup 1 --actions 1 --padding 10 --background-color "#81a1c1" --default-timeout 10000
+# Mako
+bindsym $mod+n exec makoctl dismiss
+bindsym $mod+Shift+n exec makoctl dismiss -a
+####################################################################################################
+# Workarounds
+# brave-browser --new-window --app=https://youtube.com uses keyboard inhibitor protocol
+# disable this otherwise sway hotkeys don't work
+for_window [app_id="^chrome-.*"] shortcuts_inhibitor disable
+for_window [app_id="^brave-.*"] shortcuts_inhibitor disable
+####################################################################################################
+# Clapboard - remember clipboard
+# sit in background and store copied text
+exec wl-paste --watch bash -c "xargs -0 -I{} clapboard store {}"
+exec wl-paste -p --watch bash -c "xargs -0 -I{} clapboard store {}"
+
+#bindsym $mod+c exec clapboard
+####################################################################################################
+bindsym $mod+x exec warpd --hint
+bindsym $mod+c exec warpd --normal
+bindsym $mod+g exec warpd --grid --oneshot
+####################################################################################################
 # Autostart
 #
 # Peripherals
@@ -264,27 +288,7 @@ exec blueman-applet
 #exec gnome-keyring-daemon --start -bindsym-components=pkcs11
 
 exec swaymsg "workspace 1; exec brave --restore-last-session;"
-exec swaymsg "workspace 1; exec $term -e tmux attach; resize set width 1600px"
+exec sleep 1 && swaymsg "workspace 1; exec alacritty -e tmux attach"
+exec sleep 1.2 && swaymsg "resize set width 1600px"
 #exec swaymsg "workspace 4; brave-browser --new-window --app=slack.com; workspace 1"
 #exec swaymsg "workspace 2; exec $term; workspace 1"
-
-####################################################################################################
-# Notifications
-exec mako --icons 1 --markup 1 --actions 1 --padding 10 --background-color "#81a1c1" --default-timeout 10000
-# Mako
-bindsym $mod+n exec makoctl dismiss
-bindsym $mod+Shift+n exec makoctl dismiss -a
-####################################################################################################
-# Workarounds
-# brave-browser --new-window --app=https://youtube.com uses keyboard inhibitor protocol
-# disable this otherwise sway hotkeys don't work
-for_window [app_id="^chrome-.*"] shortcuts_inhibitor disable
-for_window [app_id="^brave-.*"] shortcuts_inhibitor disable
-####################################################################################################
-# Clapboard - remember clipboard
-# sit in background and store copied text
-exec wl-paste --watch bash -c "xargs -0 -I{} clapboard store {}"
-exec wl-paste -p --watch bash -c "xargs -0 -I{} clapboard store {}"
-
-bindsym $mod+c exec clapboard
-####################################################################################################

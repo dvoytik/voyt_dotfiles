@@ -1,3 +1,4 @@
+# vi: ft=sh
 
 if status is-interactive
 # Commands to run in interactive sessions can go here
@@ -20,11 +21,15 @@ export EDITOR=(which nvim)
 alias r='nvim -R -'
 
 # Directory listing
-alias ll='exa -F -l --color=always | less -F -R --use-color'
-function llt
-    exa -l -F --sort=modified --color=always $argv | less -F -R --use-color
+function ll
+    exa -l --classify --color=always $argv | less -F -N -R --use-color
 end
-alias tree='exa -F --tree --color=always | less -F -R --use-color'
+function llt
+    exa -l --classify --sort=modified --color=always $argv | less -F -N -R --use-color
+end
+function tree
+    exa --tree --classify --color=always $argv | less -F -N -R --use-color
+end
 alias t=tree
 
 # Git aliases

@@ -1,7 +1,25 @@
 [core]
-    editor = nvim
-    excludesfile = ~/.gitignore
-    #pager = "less -rS"
+    pager = delta --navigate --diff-so-fancy
+
+[interactive]
+    diffFilter = delta --color-only --features=interactive --diff-so-fancy
+
+[delta]
+    features = decorations
+    line-numbers = true
+
+[delta "interactive"]
+    keep-plus-minus-markers = false
+
+[delta "decorations"]
+    commit-decoration-style = blue ol
+    commit-style = raw
+    file-style = omit
+    hunk-header-decoration-style = blue box
+    hunk-header-file-style = red
+    hunk-header-line-number-style = "#067a00"
+    hunk-header-style = file line-number syntax
+
 [color]
     ui = true
     hist = true
@@ -28,20 +46,7 @@
     smtpssl = true
     # hack to replace from
     #from = voytikd@gmail.com
+
 [pull]
     rebase = true
 
-[pager]
-    #log = diff-highlight | less
-    #show = diff-highlight | less
-    #diff = diff-highlight | less
-
-[color "diff"]
-    meta = magenta bold
-    #meta = red bold
-[diff]
-    tool = vimdiff
-    renameLimit = 2000
-[mergetool]
-    # controls if difftool asks to run vimdiff for each file:
-    #prompt = false

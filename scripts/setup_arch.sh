@@ -44,6 +44,7 @@ function arch_system_setup() {
 # * set paralleld download in /etc/pacman.conf
 # * set up /etc/hosts
 # * secure ssh server: nvim /etc/ssh/sshd_config
+# * nvim /etc/security/faillock.conf
 }
   
 function install_user_packages() {
@@ -66,13 +67,17 @@ function install_user_packages() {
     zoxide \
     vimimv \
     cozy-desktop \
-    pass
+    pass \
+    git-delta
     #ncal \
     #fzf \
     #gdu \
     #vlc \
     #gimp
   # gcc cmake g++ pkg-config \
+  paru -S \
+    pass-coffin \
+    warpd-wayland
 
   # for laptop:
     #tlp \
@@ -271,6 +276,7 @@ function setup_sway() {
   sudo cp ./scripts/swaylock.sh /usr/local/bin/
 }
 
+# listen streaming music
 function install_code_radio_cli {
   sudo apt install libasound2-dev libssl-dev
   cargo install code-radio-cli
