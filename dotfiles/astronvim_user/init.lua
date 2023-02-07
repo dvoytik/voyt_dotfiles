@@ -30,19 +30,19 @@ local config = {
 
   -- Add highlight groups in any theme
   highlights = {
-     init = { -- this table overrides highlights in all themes
-     -- set the transparency for all of these highlight groups
-       Normal = { bg = "NONE", ctermbg = "NONE" }, -- NONE means transparent
-       NormalNC = { bg = "NONE", ctermbg = "NONE" },
-       CursorColumn = { cterm = {}, ctermbg = "NONE", ctermfg = "NONE" },
-       CursorLine = { cterm = {}, ctermbg = "NONE", ctermfg = "NONE" },
-       CursorLineNr = { cterm = {}, ctermbg = "NONE", ctermfg = "NONE" },
-       LineNr = {},
-       SignColumn = {},
-       StatusLine = {},
-       NeoTreeNormal = { bg = "NONE", ctermbg = "NONE" },
-       NeoTreeNormalNC = { bg = "NONE", ctermbg = "NONE" },
-   },
+    init = { -- this table overrides highlights in all themes
+      -- set the transparency for all of these highlight groups
+      Normal = { bg = "NONE", ctermbg = "NONE" }, -- NONE means transparent
+      NormalNC = { bg = "NONE", ctermbg = "NONE" },
+      CursorColumn = { cterm = {}, ctermbg = "NONE", ctermfg = "NONE" },
+      CursorLine = { cterm = {}, ctermbg = "NONE", ctermfg = "NONE" },
+      CursorLineNr = { cterm = {}, ctermbg = "NONE", ctermfg = "NONE" },
+      LineNr = {},
+      SignColumn = {},
+      StatusLine = {},
+      NeoTreeNormal = { bg = "NONE", ctermbg = "NONE" },
+      NeoTreeNormalNC = { bg = "NONE", ctermbg = "NONE" },
+    },
     -- duskfox = { -- a table of overrides/changes to the duskfox theme
     --   Normal = { bg = "#000000" },
     -- },
@@ -51,12 +51,13 @@ local config = {
   -- set vim options here (vim.<first_key>.<second_key> = value)
   options = {
     opt = {
-      -- set to true or false etc.
       relativenumber = true, -- sets vim.opt.relativenumber
       number = true, -- sets vim.opt.number
       spell = false, -- sets vim.opt.spell
       signcolumn = "yes", -- sets vim.opt.signcolumn
       wrap = true, -- sets vim.opt.wrap
+      list = true,
+      listchars = { tab = "│→", extends = "⟩", precedes = "⟨", trail = "·", nbsp = "␣" },
     },
     g = {
       mapleader = " ", -- sets vim.g.mapleader
@@ -216,7 +217,8 @@ local config = {
       ["<leader>bc"] = { "<cmd>BufferLinePickClose<cr>", desc = "Pick to close" },
       ["<leader>bj"] = { "<cmd>BufferLinePick<cr>", desc = "Pick to jump" },
       ["<leader>bt"] = { "<cmd>BufferLineSortByTabs<cr>", desc = "Sort by tabs" },
-      ["<leader>j"] = { "<cmd>HopPatternMW<cr>", desc = "Move cursor to pattern" },
+      ["<leader>j"] = { "<cmd>HopChar1<cr>", desc = "Move cursor to char" },
+      ["<leader>x"] = { "<cmd>w | silent !./test.sh<cr>", desc = "Run ./test.sh" },
       -- quick save
       -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
     },
@@ -237,12 +239,11 @@ local config = {
       -- Add plugins, the packer syntax without the "use"
       -- { "andweeb/presence.nvim" },
       {
-          "phaazon/hop.nvim",
-          branch = "v2",
-          config = function()
-              -- you can configure Hop the way you like here; see :h hop-config
-              require("hop").setup({ keys = 'etovxqpdygfblzhckisuran', })
-          end,
+        "phaazon/hop.nvim",
+        branch = "v2",
+        config = function()
+          require("hop").setup({ keys = 'etovxqpdygfblzhckisuran', })
+        end,
       },
       -- {
       --   "ray-x/lsp_signature.nvim",
@@ -284,6 +285,17 @@ local config = {
       -- config variable is the default configuration table for the setup function call
       config.options.max_name_length = 40; -- default is 14
       -- config.options.separator_style = "slant"; -- default is "thin"
+      return config
+    end,
+    -- override default Telescope options
+    ["telescope"] = function(config)
+      config.defaults.layout_strategy = "vertical";
+      config.defaults.layout_config.vertical.width = 0.99;
+      config.defaults.layout_config.vertical.height = 0.99;
+      --config.defaults.layout_config.horizontal.width = 0.99;
+      --config.defaults.layout_config.horizontal.height = 0.99;
+      config.defaults.layout_config.preview_cutoff = 30;
+      --config.defaults.layout_config.preview_height = 0.4;
       return config
     end,
     --

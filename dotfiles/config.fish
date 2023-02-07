@@ -18,7 +18,10 @@ export EDITOR=(which nvim)
 # common aliases
 #
 #alias fd="fdfind"
-alias r='nvim -R -'
+alias v=nvim
+alias r='less -F -N -R --use-color'
+
+alias ff="nvim '+Telescope fd'"
 
 # Directory listing
 function ll

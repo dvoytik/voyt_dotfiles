@@ -68,7 +68,8 @@ function install_user_packages() {
     vimimv \
     cozy-desktop \
     pass \
-    git-delta
+    git-delta \
+    bottom 
     #ncal \
     #fzf \
     #gdu \

@@ -2,7 +2,7 @@ window:
   columns: 160
   lines: 100
     #  startup_mode: Fullscreen
-  opacity: 0.93
+  opacity: 0.97
 scrolling:
   history: 0
 
