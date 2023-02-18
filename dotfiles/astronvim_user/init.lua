@@ -104,7 +104,7 @@ local config = {
       bg = "NONE",
     },
     highlights = function(hl) -- or a function that returns a new table of colors to set
-      local C = require "default_theme.colors"
+      local C = require("default_theme.colors")
 
       hl.Normal = { fg = C.fg, bg = C.bg }
 
@@ -158,13 +158,14 @@ local config = {
         enabled = true, -- enable or disable format on save globally
         allow_filetypes = { -- enable format on save for specified filetypes only
           -- "go",
+          "lua",
         },
         ignore_filetypes = { -- disable format on save for specified filetypes
           -- "python",
         },
       },
       disabled = { -- disable formatting capabilities for the listed language servers
-        -- "sumneko_lua",
+        "sumneko_lua",
       },
       timeout_ms = 1000, -- default format timeout
       -- filter = function(client) -- fully override the default formatting function
@@ -264,37 +265,37 @@ local config = {
     -- All other entries override the require("<key>").setup({...}) call for default plugins
     ["null-ls"] = function(config) -- overrides `require("null-ls").setup(config)`
       -- config variable is the default configuration table for the setup function call
-      -- local null_ls = require "null-ls"
+      local null_ls = require("null-ls")
 
       -- Check supported formatters and linters
       -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
       -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
       config.sources = {
         -- Set a formatter
-        -- null_ls.builtins.formatting.stylua,
+        null_ls.builtins.formatting.stylua,
         -- null_ls.builtins.formatting.prettier,
       }
       return config -- return final config table
     end,
     ["notify"] = function(config)
-      config.background_colour = "#000000";
+      config.background_colour = "#000000"
       return config
     end,
     -- override default Bufferline options
     ["bufferline"] = function(config)
       -- config variable is the default configuration table for the setup function call
-      config.options.max_name_length = 40; -- default is 14
+      config.options.max_name_length = 40 -- default is 14
       -- config.options.separator_style = "slant"; -- default is "thin"
       return config
     end,
     -- override default Telescope options
     ["telescope"] = function(config)
-      config.defaults.layout_strategy = "vertical";
-      config.defaults.layout_config.vertical.width = 0.99;
-      config.defaults.layout_config.vertical.height = 0.99;
+      config.defaults.layout_strategy = "vertical"
+      config.defaults.layout_config.vertical.width = 0.99
+      config.defaults.layout_config.vertical.height = 0.99
       --config.defaults.layout_config.horizontal.width = 0.99;
       --config.defaults.layout_config.horizontal.height = 0.99;
-      config.defaults.layout_config.preview_cutoff = 30;
+      config.defaults.layout_config.preview_cutoff = 30
       --config.defaults.layout_config.preview_height = 0.4;
       return config
     end,

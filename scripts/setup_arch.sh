@@ -69,6 +69,7 @@ function install_user_packages() {
     cozy-desktop \
     pass \
     git-delta \
+    handlr \
     bottom 
     #ncal \
     #fzf \
@@ -78,6 +79,7 @@ function install_user_packages() {
   # gcc cmake g++ pkg-config \
   paru -S \
     pass-coffin \
+    xdg-utils-handlr \
     warpd-wayland
 
   # for laptop:
@@ -163,6 +165,12 @@ function install_fonts() {
            /usr/local/share/fonts/OTF
   cd ..
   rm -rf c CascadiaCode.zip
+}
+
+function setup_fonts() {
+  gsettings set org.gnome.desktop.interface font-name 'Cantarell 16'
+  gsettings set org.gnome.desktop.interface document-font-name 'Cantarell 16'
+  gsettings set org.gnome.desktop.interface monospace-font-name 'Source Code Pro 16'
 }
 
 function install_rust() {
@@ -310,6 +318,17 @@ function install_clapboard() {
   ln -s $PWD/dotfiles/clapboard ~/.config/clapboard
 }
 
+function setup_microphone() {
+  #sudo pacman -S noise-suppression-for-voice
+  #backup_dir ~/.config/pipewire
+  ln -s $PWD/dotfiles/pipewire ~/.config/pipewire
+
+  mkdir -p ~/.config/systemd/user/
+  ln -s $PWD/dotfiles/systemd/user/pipewire-input-filter-chain.service ~/.config/systemd/user/
+  systemctl --user daemon-reload
+  systemctl --user enable pipewire-input-filter-chain.service
+}
+
 # Manually install:
 # * mouseless key navigator in browsers:
 #   * Surfingkey (alternative - vimium)
@@ -332,6 +351,7 @@ function install_clapboard() {
 #setup_starship
 #install_setup_keyd
 #install_fonts
+#setup_fonts
 #install_rust
 #setup_nvim_astronvim
 #install_code_radio_cli
@@ -344,5 +364,6 @@ function install_clapboard() {
 #install_lazygit
 #install_swappy
 #install_clapboard
+#setup_microphone
 #
 #
