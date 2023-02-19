@@ -19,8 +19,9 @@ function backup_dir() {
 # pacman -Qnqtt | nvim -
 
 function install_system_packages() {
-  pacman -Syyu
-  pacman -S \
+  sudo pacman -Syyu
+  sudo pacman -S \
+    make autoconf automake bison flex m4 patch texinfo \
     sudo \
     polkit \
     man-db man-pages \
@@ -29,28 +30,18 @@ function install_system_packages() {
     pkgstats \
     noto-fonts ttf-liberation \
     libnotify \
-    pipewire-pulse \
+    pipewire-pulse pipewire-media-session \
     pavucontrol \
+    network-manager-applet \
     pacman-contrib
 
   # openssh
 }
 
-function arch_system_setup() {
-  sudo systemctl enable fstrim.timer    # send TRIM command to the disks once per week
-  sudo systemctl enable paccache.timer  # clean up package cache once per week
-  # TODO manually:
-# * nmcli device wifi connect <SSID_or_BSSID> password <password>
-# * set paralleld download in /etc/pacman.conf
-# * set up /etc/hosts
-# * secure ssh server: nvim /etc/ssh/sshd_config
-# * nvim /etc/security/faillock.conf
-}
-  
 function install_user_packages() {
-  pacman -Syyu
-  pacman -S \
-    nvim \
+  sudo pacman -Syyu
+  sudo pacman -S \
+    neovim \
     git \
     tmux \
     fish \
@@ -65,12 +56,14 @@ function install_user_packages() {
     firefox \
     blueman \
     zoxide \
-    vimimv \
+    vimiv \
     cozy-desktop \
     pass \
     git-delta \
     handlr \
-    bottom 
+    guvcview \
+    zathura zathura-pdf-mupdf \
+    bottom
     #ncal \
     #fzf \
     #gdu \
@@ -78,6 +71,7 @@ function install_user_packages() {
     #gimp
   # gcc cmake g++ pkg-config \
   paru -S \
+    brave-bin \
     pass-coffin \
     xdg-utils-handlr \
     warpd-wayland
@@ -88,11 +82,22 @@ function install_user_packages() {
 
 }
 
+function arch_system_setup() {
+  sudo systemctl enable fstrim.timer    # send TRIM command to the disks once per week
+  sudo systemctl enable paccache.timer  # clean up package cache once per week
+  # TODO manually:
+# * nmcli device wifi connect <SSID_or_BSSID> password <password>
+# * set paralleld download in /etc/pacman.conf
+# * set up /etc/hosts
+# * secure ssh server: nvim /etc/ssh/sshd_config
+# * nvim /etc/security/faillock.conf
+}
+
 function install_setup_keyd() {
   # laptop keyboard
-  #sudo cp dotfiles/keyd.conf /etc/keyd/default.conf
+  sudo cp dotfiles/keyd/keyd.conf /etc/keyd/default.conf
   # kinesis keyboard
-  sudo cp dotfiles/keyd/keyd.conf_KINESYS /etc/keyd/default.conf
+  #sudo cp dotfiles/keyd/keyd.conf_KINESYS /etc/keyd/default.conf
   paru keyd
   sudo systemctl enable keyd
   sudo systemctl start keyd
@@ -145,11 +150,13 @@ function setup_gnome_terminal() {
 
 # AUR helper
 function install_paru() {
-  pacman -Syu fakeroot
-  cd /tmp
+  sudo pacman -Syu pkg-config gcc git fakeroot
+  cd /var/tmp
   git clone https://aur.archlinux.org/paru.git
   cd paru
   makepkg -si
+  cd
+  rm -rf /var/tmp
 }
 
 function install_fonts() {
@@ -157,7 +164,6 @@ function install_fonts() {
   mkdir -p c && cd c
   wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/CascadiaCode.zip
   unzip CascadiaCode.zip
-  exit
   sudo mkdir -p /usr/local/share/fonts/OTF
   sudo cp 'Caskaydia Cove Nerd Font Complete Mono Bold.otf' \
            'Caskaydia Cove Nerd Font Complete Mono Italic.otf' \
@@ -177,10 +183,11 @@ function install_rust() {
   pacman -Syu rustup
   rustup default stable
   rustup component add rust-analyzer
+  mkdir -p ~/.cargo/bin
   ln -s $(rustup which --toolchain stable rust-analyzer) ~/.cargo/bin
 }
 
-function install_alacritty() {
+function ARCH_DOESNOT_NEED_install_alacritty() {
   cargo >/dev/null || echo "ERROR: cargo is not installed" || exit
   sudo apt install gcc g++ cmake pkg-config libfreetype6-dev libfontconfig1-dev \
                    libxcb-xfixes0-dev libxkbcommon-dev python3
@@ -258,7 +265,7 @@ function setup_git() {
 }
 
 function install_sway() {
-  pacman -Syu \
+  sudo pacman -Syu \
     sway \
     swayidle \
     swaylock \
@@ -266,10 +273,10 @@ function install_sway() {
     xdg-desktop-portal-wlr \
     wofi \
     waybar \
-    mako-notifier \
-    pulseaudio-utils \
+    mako \
     slurp \
     grim
+  # pulseaudio-utils \
 }
 
 function setup_sway() {
@@ -329,41 +336,46 @@ function setup_microphone() {
   systemctl --user enable pipewire-input-filter-chain.service
 }
 
+function disk_encryption() {
+  paru -S sedutil
+}
+
 # Manually install:
 # * mouseless key navigator in browsers:
 #   * Surfingkey (alternative - vimium)
 
 # TODO:
-# https://github.com/rvaiya/warpd
 # feh - wallpaper
 # https://github.com/qutebrowser/qutebrowser
 
+#install_rust
+#install_paru
 #install_system_packages
-#arch_system_setup
-#
 #install_user_packages
+#install_setup_keyd
 #setup_tmux
 #setup_fish_shell
 #setup_git
 #install_sway
 #setup_sway
-#setup_alacritty
-#setup_starship
-#install_setup_keyd
 #install_fonts
 #setup_fonts
-#install_rust
+#setup_alacritty
+#setup_starship
+#setup_tlp
+#arch_system_setup
+#
 #setup_nvim_astronvim
 #install_code_radio_cli
 #
-#install_alacritty
+#ARCH_DOESNOT_NEED_install_alacritty
 #setup_nvim_my_config
-#setup_tlp
 #setup_gnome_terminal
 #install_setup_wezterm
 #install_lazygit
 #install_swappy
 #install_clapboard
 #setup_microphone
+#disk_encryption
 #
 #
