@@ -33,6 +33,7 @@ function install_system_packages() {
     pipewire-pulse pipewire-media-session \
     pavucontrol \
     network-manager-applet \
+    xdg-desktop-portal \
     pacman-contrib
 
   # openssh
@@ -281,7 +282,8 @@ function install_sway() {
 
 function setup_sway() {
   backup_dir ~/.config/sway
-  ln -s $PWD/dotfiles/sway/ $HOME/.config/sway
+  mkdir -p $HOME/.config/sway
+  ln -s $PWD/dotfiles/sway/config $HOME/.config/sway/config
 
   backup_dir ~/.config/waybar
   ln -s $PWD/dotfiles/waybar $HOME/.config/waybar
@@ -290,6 +292,9 @@ function setup_sway() {
   ln -s $PWD/dotfiles/wofi $HOME/.config/wofi
 
   sudo cp ./scripts/swaylock.sh /usr/local/bin/
+
+  # laptop
+  ln -s $PWD/dotfiles/sway/config_laptop $HOME/.config/sway/config_local
 }
 
 # listen streaming music
@@ -336,6 +341,10 @@ function setup_microphone() {
   systemctl --user enable pipewire-input-filter-chain.service
 }
 
+function pass_coffin() {
+  ln -s $HOME/CozyDrive/.password-store/ ~/.password-store
+}
+
 function disk_encryption() {
   paru -S sedutil
 }
@@ -364,6 +373,7 @@ function disk_encryption() {
 #setup_starship
 #setup_tlp
 #arch_system_setup
+#pass_coffin
 #
 #setup_nvim_astronvim
 #install_code_radio_cli

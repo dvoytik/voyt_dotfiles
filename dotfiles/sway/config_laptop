@@ -1,0 +1,6 @@
+# Sway config for my Thinkpad
+
+# to print all seetings, execute: swaymsg -t get_inputs
+input "1739:0:Synaptics_TM3418-002" {
+      natural_scroll enabled
+}

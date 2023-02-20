@@ -220,6 +220,7 @@ local config = {
       ["<leader>bt"] = { "<cmd>BufferLineSortByTabs<cr>", desc = "Sort by tabs" },
       ["<leader>j"] = { "<cmd>HopChar1<cr>", desc = "Move cursor to char" },
       ["<leader>x"] = { "<cmd>w | silent !./test.sh<cr>", desc = "Run ./test.sh" },
+      ["<leader>m"] = { "<cmd>HiMyWordsToggle<cr>", desc = "Highlight word" },
       -- quick save
       -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
     },
@@ -243,7 +244,13 @@ local config = {
         "phaazon/hop.nvim",
         branch = "v2",
         config = function()
-          require("hop").setup({ keys = 'etovxqpdygfblzhckisuran', })
+          require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
+        end,
+      },
+      {
+        "dvoytik/hi-my-words.nvim",
+        config = function()
+          require("hi-my-words")
         end,
       },
       -- {
