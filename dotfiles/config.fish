@@ -43,7 +43,7 @@ alias ga='git add'
 alias gam='git commit --ammend'
 alias gap='clear; git add -p'
 
-alias cal='date +%H:%M; ncal -w -s DE -M -b -y'
+alias cal='date +%H:%M; /usr/bin/cal -w -m -y'
 
 starship init fish | source
 zoxide init fish | source
