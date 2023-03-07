@@ -34,7 +34,9 @@ function install_system_packages() {
     pavucontrol \
     network-manager-applet \
     xdg-desktop-portal \
-    pacman-contrib
+    pacman-contrib \
+    alsa-utils \
+    usbutils
 
   # openssh
 }
@@ -330,6 +332,11 @@ function install_clapboard() {
   ln -s $PWD/dotfiles/clapboard ~/.config/clapboard
 }
 
+function setup_audio() {
+  # add user to audio group
+  sudo usermod -a -G audio $USER
+}
+
 function setup_microphone() {
   #sudo pacman -S noise-suppression-for-voice
   #backup_dir ~/.config/pipewire
@@ -347,6 +354,26 @@ function pass_coffin() {
 
 function disk_encryption() {
   paru -S sedutil
+}
+
+function setup_printer() {
+ sudo pacman -S cups cups-pdf hplip sane xsane
+ sudo systemctl enable cups.socket
+    # cups: for printing support [installed]
+    # sane: for scanner support
+    # xsane: sane scanner frontend
+    # python-pillow: for commandline scanning support [installed]
+    # python-reportlab: for pdf output in hp-scan
+    # rpcbind: for network support
+    # python-pyqt5: for running GUI and hp-toolbox
+    # libusb: for advanced usb support [installed]
+    # wget: for network support [installed]
+}
+
+function setup_grub() {
+  sudo nvim /etc/default/grub
+  #GRUB_THEME="/boot/grub/themes/starfield/theme.txt"
+  sudo grub-mkconfig -o /boot/grub/grub.cfg
 }
 
 # Manually install:
@@ -385,7 +412,8 @@ function disk_encryption() {
 #install_lazygit
 #install_swappy
 #install_clapboard
+#setup_audio
 #setup_microphone
 #disk_encryption
-#
+#setup_grub
 #

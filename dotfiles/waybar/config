@@ -101,7 +101,7 @@
     "clock": {
         "format": "{:%Y-%m-%d  %H:%M}",
         //"format-alt": "{:%Y-%m-%d}"
-        "on-click": "alacritty -e fish -c 'date +%H:%M; ncal -w -s DE -M -b -y; read'",
+        "on-click": "alacritty -e fish -c 'date +%H:%M; cal; read'",
         // uncomment in newer versions:
         //"today-format": "<span color='#ff6699'><b><u>{%D}</u></b></span>",
         //"calendar-weeks-pos": "right",

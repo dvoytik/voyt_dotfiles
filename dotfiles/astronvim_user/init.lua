@@ -293,6 +293,7 @@ local config = {
       -- config variable is the default configuration table for the setup function call
       config.options.max_name_length = 40 -- default is 14
       -- config.options.separator_style = "slant"; -- default is "thin"
+      config.options.mode = "tabs"
       return config
     end,
     -- override default Telescope options
