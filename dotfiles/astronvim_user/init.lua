@@ -159,6 +159,7 @@ local config = {
         allow_filetypes = { -- enable format on save for specified filetypes only
           -- "go",
           "lua",
+          "rust",
         },
         ignore_filetypes = { -- disable format on save for specified filetypes
           -- "python",
