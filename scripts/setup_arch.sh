@@ -309,17 +309,9 @@ function install_code_radio_cli {
 }
 
 # screenshot tool for sway
-function install_swappy() {
-  sudo apt install grimshot slurp build-essential meson libcairo2-dev libpango1.0-dev \
-    libgtk-3-dev scdoc gettext
-  pushd /tmp
-  git clone https://github.com/jtheoof/swappy
-  cd swappy
-  meson setup build
-  ninja -C build
-  ninja -C build
-  sudo ninja -C build install
-  popd
+function install_screenshot_tools() {
+  paru -S grimshot
+  sudo pacman -S swappy
 }
 
 function install_clapboard() {
@@ -376,6 +368,13 @@ function setup_grub() {
   sudo grub-mkconfig -o /boot/grub/grub.cfg
 }
 
+install_ocr() {
+  sudo pacman -S tesseract tesseract-data-eng tesseract-data-deu
+  # how to OCR an JPEG with german text:
+  # tesseract -l deu ~/Downloads/IMG_4071.jpeg out
+  # nvim out.txt
+}
+
 # Manually install:
 # * mouseless key navigator in browsers:
 #   * Surfingkey (alternative - vimium)
@@ -416,4 +415,5 @@ function setup_grub() {
 #setup_microphone
 #disk_encryption
 #setup_grub
+#install_screenshot_tools
 #

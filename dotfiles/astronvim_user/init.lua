@@ -222,6 +222,8 @@ local config = {
       ["<leader>j"] = { "<cmd>HopChar1<cr>", desc = "Move cursor to char" },
       ["<leader>x"] = { "<cmd>w | silent !./test.sh<cr>", desc = "Run ./test.sh" },
       ["<leader>m"] = { "<cmd>HiMyWordsToggle<cr>", desc = "Highlight word" },
+      ["<leader>rt"] = { "<cmd>w | split | terminal cargo test<cr>", desc = "cargo test" },
+      ["<leader>rr"] = { "<cmd>w | split | terminal cargo run<cr>", desc = "cargo run" },
       -- quick save
       -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
     },
