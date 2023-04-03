@@ -15,6 +15,11 @@ return {
       end,
       desc = "Pick to close",
     },
+    ["<leader>j"] = { "<cmd>HopChar1<cr>", desc = "Move cursor to char" },
+    ["<leader>x"] = { "<cmd>w | silent !./test.sh<cr>", desc = "Run ./test.sh" },
+    ["<leader>m"] = { "<cmd>HiMyWordsToggle<cr>", desc = "Highlight word" },
+    ["<leader>rt"] = { "<cmd>w | split | terminal cargo test<cr>", desc = "cargo test" },
+    ["<leader>rr"] = { "<cmd>w | split | terminal cargo run<cr>", desc = "cargo run" },
     -- tables with the `name` key will be registered with which-key if it's installed
     -- this is useful for naming menus
     ["<leader>b"] = { name = "Buffers" },

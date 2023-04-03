@@ -5,8 +5,10 @@ return {
     relativenumber = true, -- sets vim.opt.relativenumber
     number = true, -- sets vim.opt.number
     spell = false, -- sets vim.opt.spell
-    signcolumn = "auto", -- sets vim.opt.signcolumn to auto
-    wrap = false, -- sets vim.opt.wrap
+    signcolumn = "yes", -- sets vim.opt.signcolumn to auto
+    wrap = true, -- sets vim.opt.wrap
+    list = true,
+    listchars = { tab = "│→", extends = "⟩", precedes = "⟨", trail = "·", nbsp = "␣" },
   },
   g = {
     mapleader = " ", -- sets vim.g.mapleader
