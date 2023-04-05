@@ -16,10 +16,17 @@ return {
       desc = "Pick to close",
     },
     ["<leader>j"] = { "<cmd>HopChar1<cr>", desc = "Move cursor to char" },
-    ["<leader>x"] = { "<cmd>w | silent !./test.sh<cr>", desc = "Run ./test.sh" },
+    ["<leader>x"] = { "<cmd>w | split | terminal ./test.sh<cr>", desc = "Run ./test.sh" },
     ["<leader>m"] = { "<cmd>HiMyWordsToggle<cr>", desc = "Highlight word" },
+    -- Rust specific mappings:
     ["<leader>rt"] = { "<cmd>w | split | terminal cargo test<cr>", desc = "cargo test" },
     ["<leader>rr"] = { "<cmd>w | split | terminal cargo run<cr>", desc = "cargo run" },
+    ["<leader>rn"] = {
+      function()
+        vim.diagnostic.goto_next()
+      end,
+      desc = "next diagnostic",
+    },
     -- tables with the `name` key will be registered with which-key if it's installed
     -- this is useful for naming menus
     ["<leader>b"] = { name = "Buffers" },
