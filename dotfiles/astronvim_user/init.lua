@@ -29,17 +29,17 @@ return {
   lsp = {
     setup_handlers = {
       -- run nightly rustfmt
-      rust_analyzer = function(_, opts)
-        require("lspconfig").rust_analyzer.setup({
-          settings = {
-            ["rust-analyzer"] = {
-              rustfmt = {
-                extraArgs = { "+nightly" },
-              },
-            },
-          },
-        })
-      end,
+      -- rust_analyzer = function(_, opts)
+      --   require("lspconfig").rust_analyzer.setup({
+      --     opts = {
+      --       ["rust-analyzer"] = {
+      --         rustfmt = {
+      --           extraArgs = { "+nightly" },
+      --         },
+      --       },
+      --     },
+      --   })
+      -- end,
     },
     -- customize lsp formatting options
     formatting = {
