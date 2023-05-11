@@ -28,7 +28,7 @@ function install_system_packages() {
     wget \
     unzip \
     pkgstats \
-    noto-fonts ttf-liberation \
+    noto-fonts noto-fonts-emoji ttf-liberation \
     libnotify \
     pipewire-pulse pipewire-media-session \
     pavucontrol \
@@ -177,9 +177,9 @@ function install_fonts() {
 }
 
 function setup_fonts() {
-  gsettings set org.gnome.desktop.interface font-name 'Cantarell 16'
-  gsettings set org.gnome.desktop.interface document-font-name 'Cantarell 16'
-  gsettings set org.gnome.desktop.interface monospace-font-name 'Source Code Pro 16'
+  gsettings set org.gnome.desktop.interface font-name 'Cantarell 14'
+  gsettings set org.gnome.desktop.interface document-font-name 'Cantarell 14'
+  gsettings set org.gnome.desktop.interface monospace-font-name 'Source Code Pro 14'
 }
 
 function install_rust() {
@@ -250,8 +250,8 @@ function setup_nvim_astronvim() {
   #install_lazygit
 
   git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim
-  pushd ~/.confg/nvim
-  git checkout v2.11.8
+  pushd ~/.config/nvim
+  git checkout v3.4.1
   ln -s $PWD/dotfiles/astronvim_user ~/.config/nvim/lua/user
   nvim +PackerSync
   set +ex
