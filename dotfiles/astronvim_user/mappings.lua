@@ -11,7 +11,9 @@ return {
     ["<leader>bn"] = { "<cmd>tabnew<cr>", desc = "New tab" },
     ["<leader>bD"] = {
       function()
-        require("astronvim.utils.status").heirline.buffer_picker(function(bufnr) require("astronvim.utils.buffer").close(bufnr) end)
+        require("astronvim.utils.status").heirline.buffer_picker(function(bufnr)
+          require("astronvim.utils.buffer").close(bufnr)
+        end)
       end,
       desc = "Pick to close",
     },
@@ -26,6 +28,25 @@ return {
         vim.diagnostic.goto_next()
       end,
       desc = "next diagnostic",
+    },
+    -- Hover (i.e., show) symbol (variable) information from LSP
+    ["<leader>rh"] = {
+      function()
+        vim.lsp.buf.hover()
+      end,
+      desc = "Hover symbol",
+    },
+    ["<leader>rs"] = {
+      function()
+        vim.lsp.buf.signature_help()
+      end,
+      desc = "Signature help",
+    },
+    ["<leader>rd"] = {
+      function()
+        vim.lsp.buf.definition()
+      end,
+      desc = "Show definition",
     },
     -- tables with the `name` key will be registered with which-key if it's installed
     -- this is useful for naming menus
