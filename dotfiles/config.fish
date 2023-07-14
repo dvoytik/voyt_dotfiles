@@ -45,7 +45,7 @@ alias gam='git commit --ammend'
 alias gap='clear; git add -p'
 
 starship init fish | source
-zoxide init fish | source
+# zoxide init fish | source
 
 end # if status is-interactive
 
