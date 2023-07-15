@@ -24,4 +24,6 @@ return {
       require("hi-my-words")
     end,
   },
+  -- I want that the window split is closed after I close the buffer:
+  { "echasnovski/mini.bufremove", enabled = false },
 }
