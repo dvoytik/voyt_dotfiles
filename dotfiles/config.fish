@@ -50,3 +50,8 @@ starship init fish | source
 end # if status is-interactive
 
 alias cal='date +%H:%M; /usr/bin/cal -w -m -y'
+
+set LOCAL_CONFIG ~/.config/fish/config_local.fish
+if test -f $LOCAL_CONFIG
+    source $LOCAL_CONFIG
+end
