@@ -202,7 +202,7 @@ include ~/.config/sway/config_local
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+Ctrl+p scratchpad shossw
+    bindsym $mod+Ctrl+p scratchpad show
 
 #
 # Resizing containers:
