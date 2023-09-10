@@ -375,6 +375,26 @@ install_ocr() {
   # nvim out.txt
 }
 
+function setup_time_sync() {
+  sudo mkdir -p /etc/systemd/timesyncd.conf.d
+  sudo sh -c 'cat > /etc/systemd/timesyncd.conf.d/local.conf << EOF
+[Time]
+NTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org
+FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
+RootDistanceMaxSec=1
+PollIntervalMinSec=1h
+PollIntervalMaxSec=2h
+ConnectionRetrySec=30
+SaveIntervalSec=1h
+EOF
+'
+  sudo timedatectl set-ntp true
+  sudo systemctl restart systemd-timesyncd.service
+  sudo systemctl status systemd-timesyncd.service
+  timedatectl status
+  timedatectl timesync-status
+}
+
 # Manually install:
 # * mouseless key navigator in browsers:
 #   * Surfingkey (alternative - vimium)
@@ -416,4 +436,4 @@ install_ocr() {
 #disk_encryption
 #setup_grub
 #install_screenshot_tools
-#
+# setup_time_sync
