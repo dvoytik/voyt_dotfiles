@@ -329,15 +329,11 @@ function setup_audio() {
   sudo usermod -a -G audio $USER
 }
 
-function setup_microphone() {
-  #sudo pacman -S noise-suppression-for-voice
-  #backup_dir ~/.config/pipewire
+# setup audio
+function setup_pipewire() {
+  sudo pacman -S noise-suppression-for-voice
+  backup_dir ~/.config/pipewire
   ln -s $PWD/dotfiles/pipewire ~/.config/pipewire
-
-  mkdir -p ~/.config/systemd/user/
-  ln -s $PWD/dotfiles/systemd/user/pipewire-input-filter-chain.service ~/.config/systemd/user/
-  systemctl --user daemon-reload
-  systemctl --user enable pipewire-input-filter-chain.service
 }
 
 function pass_coffin() {
@@ -432,7 +428,7 @@ EOF
 #install_swappy
 #install_clapboard
 #setup_audio
-#setup_microphone
+#setup_pipewire
 #disk_encryption
 #setup_grub
 #install_screenshot_tools
