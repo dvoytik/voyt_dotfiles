@@ -331,9 +331,21 @@ function setup_audio() {
 
 # setup audio
 function setup_pipewire() {
-  sudo pacman -S noise-suppression-for-voice
+  sudo pacman -S \
+    noise-suppression-for-voice \
+    lsp-plugins-lv2 # equalizer
   backup_dir ~/.config/pipewire
   ln -s $PWD/dotfiles/pipewire ~/.config/pipewire
+
+  # auto-run easyeffect
+  mkdir -p ~/.config/systemd/user/
+  ln -s $PWD/dotfiles/systemd/user/easyeffects.service ~/.config/systemd/user/
+  systemctl --user daemon-reload
+  systemctl --user enable easyeffects.service
+
+  # TODO: manuall run easyeffects, add "Equalizer" effect and load APO preset, e.g
+  # audio/Beyerdynamic_DT770_old_earpads.txt
+  # safe new Easyeffect preset (e.g., as dt770) and make it default for the preferred audio device
 }
 
 function pass_coffin() {

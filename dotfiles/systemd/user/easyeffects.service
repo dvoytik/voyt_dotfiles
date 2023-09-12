@@ -1,0 +1,10 @@
+[Unit]
+Description=Easyeffects as service
+
+[Service]
+Restart=always
+RestartSec=3
+ExecStart=/usr/bin/easyeffects --gapplication-service --load-preset dt770
+
+[Install]
+WantedBy=default.target
