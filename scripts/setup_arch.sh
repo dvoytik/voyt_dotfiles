@@ -190,30 +190,6 @@ function install_rust() {
   ln -s $(rustup which --toolchain stable rust-analyzer) ~/.cargo/bin
 }
 
-function ARCH_DOESNOT_NEED_install_alacritty() {
-  cargo >/dev/null || echo "ERROR: cargo is not installed" || exit
-  sudo apt install gcc g++ cmake pkg-config libfreetype6-dev libfontconfig1-dev \
-                   libxcb-xfixes0-dev libxkbcommon-dev python3
-  cd ~/p
-  git clone https://github.com/alacritty/alacritty.git
-  pushd alacritty
-  cargo build --release --no-default-features --features=wayland
-  sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
-  sudo cp target/release/alacritty /usr/local/bin
-  sudo cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
-  sudo desktop-file-install extra/linux/Alacritty.desktop
-  sudo update-desktop-database
-  sudo mkdir -p /usr/local/share/man/man1
-  gzip -c extra/alacritty.man | sudo tee /usr/local/share/man/man1/alacritty.1.gz > /dev/null
-  gzip -c extra/alacritty-msg.man | \
-    sudo tee /usr/local/share/man/man1/alacritty-msg.1.gz > /dev/null
-
-  mkdir -p $HOME/.config/fish/completions/
-  cp extra/completions/alacritty.fish $HOME/.config/fish/completions/alacritty.fish
-
-  popd
-}
-
 function setup_alacritty() {
   mkdir -p $HOME/.config/alacritty/
   ln -s $PWD/dotfiles/alacritty.yml $HOME/.config/alacritty/alacritty.yml
@@ -432,7 +408,6 @@ EOF
 #setup_nvim_astronvim
 #install_code_radio_cli
 #
-#ARCH_DOESNOT_NEED_install_alacritty
 #setup_nvim_my_config
 #setup_gnome_terminal
 #install_setup_wezterm

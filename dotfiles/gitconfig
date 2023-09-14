@@ -1,5 +1,5 @@
 [core]
-    pager = delta --navigate --diff-so-fancy --whitespace-error-style 'red reverse'
+    pager = delta --dark --navigate --diff-so-fancy --whitespace-error-style 'red reverse'
 
 [interactive]
     diffFilter = delta --color-only --features=interactive --diff-so-fancy --whitespace-error-style 'red reverse'
@@ -7,6 +7,7 @@
 [delta]
     features = decorations
     line-numbers = true
+    light = true
 
 [delta "interactive"]
     keep-plus-minus-markers = false
