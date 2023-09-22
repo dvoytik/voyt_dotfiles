@@ -191,7 +191,7 @@ function install_rust() {
 
 function setup_alacritty() {
   mkdir -p $HOME/.config/alacritty/
-  ln -s $PWD/dotfiles/alacritty.yml $HOME/.config/alacritty/alacritty.yml
+  ln -s $PWD/dotfiles/alacritty.toml $HOME/.config/alacritty/alacritty.toml
 }
 
 function install_setup_wezterm() {
