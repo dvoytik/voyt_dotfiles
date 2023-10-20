@@ -289,12 +289,14 @@ function install_screenshot_tools() {
   sudo pacman -S swappy
 }
 
+# cliboard history
 function install_clapboard() {
-  pushd /tmp
-  git clone https://github.com/bjesus/clapboard.git
-  pushd clapboard
-  cargo build --release
-  sudo cp target/release/clapboard /usr/local/bin/
+  # pushd /tmp
+  # git clone https://github.com/bjesus/clapboard.git
+  # pushd clapboard
+  # cargo build --release
+  # sudo cp target/release/clapboard /usr/local/bin/
+  paru -S clapboard-git
 
   ln -s $PWD/dotfiles/clapboard ~/.config/clapboard
 }

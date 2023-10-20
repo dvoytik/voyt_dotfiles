@@ -1,5 +1,5 @@
-launcher = [ "wofi", "--dmenu", "" ]
-history_size = 50
+launcher = [ "wofi", "--dmenu", "--height", "100%", "-i" ]
+history_size = 100
 
 [favorites]
 # You can add your favorite clipboard pastes here like this:
