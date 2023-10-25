@@ -3,6 +3,12 @@
 if status is-interactive
 # Commands to run in interactive sessions can go here
 
+# execute sway on the first virtual terminal
+set TTY1 (tty)
+if [ "$TTY1" = "/dev/tty1" ]; then
+    exec sway
+end
+
 # Don't print greeting when start
 set fish_greeting ""
 
