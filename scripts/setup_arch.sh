@@ -129,11 +129,6 @@ function setup_tlp() {
   sudo systemctl status tlp
 }
 
-function setup_nvim_my_config() {
-  mkdir -p ~/.config/
-  ln -s $PWD/dotfiles/nvim  ~/.config/
-}
-
 function setup_gnome_terminal() {
   # Gnome Terminal color scheme
   mkdir ~/p/
@@ -424,7 +419,6 @@ EOF
 #setup_nvim_astronvim
 #install_code_radio_cli
 #
-#setup_nvim_my_config
 #setup_gnome_terminal
 #install_setup_wezterm
 #install_lazygit
