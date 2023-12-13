@@ -390,6 +390,27 @@ EOF
   timedatectl timesync-status
 }
 
+function setup_nvidia() {
+  # list full list of open source video drivers:
+  # pacman -Ss xf86-video
+  # vide driver for RTX 4070:
+  sudo pacman -S nvidia-open
+  # set nvidia_drm.modeset=1
+  echo 'options nvidia_drm modeset=1' > /etc/modprobe.d/nvidia.conf
+  # this should return Y:
+  # sudo cat /sys/module/nvidia_drm/parameters/modeset
+}
+
+function setup_i3() {
+  sudo pacman -S \
+    i3 \
+    xorg \
+    xorg-xinit
+
+  cp /etc/X11/xinit/xinitrc ~/.xinitrc
+  ln -s $PWD/dotfiles/i3 ~/.config/i3
+}
+
 # Manually install:
 # * mouseless key navigator in browsers:
 #   * Surfingkey (alternative - vimium)
