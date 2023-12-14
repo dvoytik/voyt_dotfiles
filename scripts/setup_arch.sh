@@ -409,6 +409,7 @@ function setup_i3() {
 
   cp /etc/X11/xinit/xinitrc ~/.xinitrc
   ln -s $PWD/dotfiles/i3 ~/.config/i3
+  ln -s $PWD/dotfiles/xinitrc ~/.xinitrc
 }
 
 # Manually install:

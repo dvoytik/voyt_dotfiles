@@ -6,7 +6,8 @@ if status is-interactive
 # execute sway on the first virtual terminal
 set TTY1 (tty)
 if [ "$TTY1" = "/dev/tty1" ]; then
-    exec sway
+    # exec sway
+    startx
 end
 
 # Don't print greeting when start
