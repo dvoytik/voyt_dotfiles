@@ -390,11 +390,11 @@ EOF
   timedatectl timesync-status
 }
 
-function setup_nvidia() {
+function setup_nvidia_proprietary_driver() {
   # list full list of open source video drivers:
   # pacman -Ss xf86-video
-  # vide driver for RTX 4070:
-  sudo pacman -S nvidia-open
+  # propriatary video driver for RTX 4070:
+  sudo pacman -S nvidia-open nvidia-utils
   # set nvidia_drm.modeset=1
   echo 'options nvidia_drm modeset=1' > /etc/modprobe.d/nvidia.conf
   # this should return Y:
