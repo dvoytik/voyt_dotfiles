@@ -5,7 +5,7 @@ if status is-interactive
 
 # execute sway on the first virtual terminal
 set TTY1 (tty)
-if [ "$TTY1" = "/dev/tty1" ]; then
+if test "$TTY1" = "/dev/tty1"
     exec sway
     # startx
 end
