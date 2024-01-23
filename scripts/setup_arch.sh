@@ -399,6 +399,19 @@ function setup_nvidia_proprietary_driver() {
   echo 'options nvidia_drm modeset=1' > /etc/modprobe.d/nvidia.conf
   # this should return Y:
   # sudo cat /sys/module/nvidia_drm/parameters/modeset
+  #
+  # disable NVIDIA GPU in sway by using only the internal GPU
+  sudo sh -c 'echo "WLR_DRM_DEVICES=/dev/dri/card1" >> /etc/environment'
+  # ls -l /dev/dri/by-path/pci-0000:00:02.0-card
+  #
+  # ↪ lspci | grep VGA
+  # 00:02.0 VGA compatible controller: Intel Corporation Raptor Lake-S GT1 [UHD Graphics 770] (rev 04)
+  # 01:00.0 VGA compatible controller: NVIDIA Corporation AD104 [GeForce RTX 4070] (rev a1)
+  #
+  # How to disable nouveau kernel module:
+  # sudo sh -c 'echo "blacklist nouveau" >> /etc/modprobe.d/blacklist-nouveau.conf'
+  # sudo sh -c 'echo "options nouveau modeset=0" >> /etc/modprobe.d/blacklist-nouveau.conf'
+  # mkinitcpio -p linux
 }
 
 function setup_i3() {
