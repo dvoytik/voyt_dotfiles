@@ -24,11 +24,17 @@ return {
       require("hi-my-words")
     end,
   },
+  -- Rust additional support:
+  -- {
+  --   'mrcjkb/rustaceanvim',
+  --   version = '^4', -- Recommended
+  --   ft = { 'rust' },
+  -- },
   -- I want that the window split is closed after I close the buffer:
   { "echasnovski/mini.bufremove", enabled = false },
   -- The yanky.nvim stores copied text in a ring buffer
   {
-    "goptsbprod/yanky.nvim",
+    "gbprod/yanky.nvim",
     opts = { },
     keys = {
       { "<leader>fp", function() require("telescope").extensions.yank_history.yank_history({ }) end, desc = "Open Yank History" },

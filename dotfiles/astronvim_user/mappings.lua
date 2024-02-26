@@ -21,7 +21,7 @@ return {
     ["<leader>x"] = { "<cmd>w | split | terminal ./test.sh<cr>", desc = "Run ./test.sh" },
     ["<leader>m"] = { "<cmd>HiMyWordsToggle<cr>", desc = "Highlight word" },
     -- Rust specific mappings:
-    ["<leader>rt"] = { "<cmd>w | split | terminal cargo test<cr>", desc = "cargo test" },
+    ["<leader>rt"] = { "<cmd>w | split | terminal cargo test --workspace<cr>", desc = "cargo test" },
     ["<leader>rr"] = { "<cmd>w | split | terminal cargo run<cr>", desc = "cargo run" },
     ["<leader>rn"] = {
       function()
