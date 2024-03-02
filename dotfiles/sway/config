@@ -292,8 +292,8 @@ exec blueman-applet
 #exec lxpolkit
 #exec gnome-keyring-daemon --start -bindsym-components=pkcs11
 
-exec swaymsg "workspace 1; exec brave --restore-last-session;"
-exec sleep 1 && swaymsg "workspace 1; exec alacritty -e tmux attach"
-exec sleep 1.2 && swaymsg "resize set width 1600px"
+exec swaymsg "workspace 1; exec alacritty -e tmux attach"
+exec swaymsg "workspace 2; exec brave --restore-last-session;"
+# exec sleep 1.2 && swaymsg "resize set width 1600px"
 #exec swaymsg "workspace 4; brave-browser --new-window --app=slack.com; workspace 1"
 #exec swaymsg "workspace 2; exec $term; workspace 1"
