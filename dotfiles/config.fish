@@ -26,10 +26,15 @@ export EDITOR=(which nvim)
 #alias fd="fdfind"
 alias v=nvim
 
+# fuzzy find files by names with nvim
+alias vff="nvim '+Telescope fd'"
+# alias vff='nvim (fzf)'
+
 alias less='less -F -N -R --use-color --line-num-width 3 --redraw-on-quit'
 alias r='less'
 
-alias ff="nvim '+Telescope fd'"
+# print last downloaded files
+alias ldf 'echo $HOME/Downloads/(ls -trh ~/Downloads/ | tail -n1)'
 
 # Directory listing
 function ll
@@ -47,9 +52,9 @@ alias t=tree
 alias gdc='clear; git diff --cached'
 alias gd='clear; git diff'
 alias gst='clear; git status'
-alias ga='git add'
-alias gam='git commit --ammend'
-alias gap='clear; git add -p'
+# alias ga='git add'
+# alias gam='git commit --ammend'
+# alias gap='clear; git add -p'
 
 starship init fish | source
 # zoxide init fish | source
