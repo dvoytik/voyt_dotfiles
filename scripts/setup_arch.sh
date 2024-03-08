@@ -296,7 +296,7 @@ function install_clapboard() {
   ln -s $PWD/dotfiles/clapboard ~/.config/clapboard
 }
 
-# setup audio
+# setup audio: pipewire, wireplumber
 function setup_pipewire() {
   # add user to audio group
   sudo usermod -a -G audio $USER
@@ -308,7 +308,10 @@ function setup_pipewire() {
     pipewire \
     wireplumber \
     pipewire-pulse \
+    rtkit \
     noise-suppression-for-voice
+
+  systemctl --user --now enable wireplumber
 
   # equalizer
   sudo pacman -S \
@@ -325,14 +328,11 @@ function setup_pipewire() {
   # audio/Beyerdynamic_DT770_old_earpads.txt
   # safe new Easyeffect preset (e.g., as dt770) and make it default for the preferred audio device
 
-  # disable pipewire auto-suspend
-  sudo mkdir -p /etc/wireplumber/main.lua.d/
-  sudo cp -a \
-    /usr/share/wireplumber/main.lua.d/50-alsa-config.lua \
-    /etc/wireplumber/main.lua.d/50-alsa-config.lua
-  ORIG_STR='\["session\.suspend-timeout-seconds"\]'
-  REPL_STR='\["session\.suspend-timeout-seconds"\] \= 7200'
-  sudo -E sed -i "/${ORIG_STR}/c${REPL_STR}" /etc/wireplumber/main.lua.d/50-alsa-config.lua
+  # How to fix cracking distortion of external audio USB interface - disable wireplumber auto-suspend:
+  ln -s $PWD/dotfiles/wireplumber $HOME/.config/wireplumber
+  systemctl --user --now restart wireplumber
+  # check configuration with:
+  systemctl --user status wireplumber
 }
 
 function pass_coffin() {
