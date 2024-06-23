@@ -213,23 +213,18 @@ function install_lazygit() {
   #ln -s $PWD/dotfiles/nvim  ~/.config/
 }
 
+# neovim with Astronvim distro in 2024
 function setup_nvim_astronvim() {
   backup_dir ~/.config/nvim
-  set -ex
   cargo install tree-sitter-cli
   #install_lazygit
 
-  git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim
-  pushd ~/.config/nvim
-  git checkout v3.4.1
-  ln -s $PWD/dotfiles/astronvim_user ~/.config/nvim/lua/user
-  nvim +PackerSync
-  set +ex
+  ln -s /home/voyt/p/voyt_dotfiles/dotfiles/nvim_astronvim/ ~/.config/nvim
 
   # Post installation setup in nvim
-  nvim '+AstroUpdate'
-  nvim '+TSInstall rust lua c' # install tree sitter language parsers
-  nvim '+LspInstall rust c' # install laguage server
+  nvim '+LspInstall rust' # install Rust laguage server
+  # nvim '+LspInstall c' # install C laguage server
+  # nvim '+TSInstall rust lua c' # install tree sitter language parsers
 }
 
 function setup_git() {
