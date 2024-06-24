@@ -1,5 +1,3 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
 -- AstroUI provides the basis for configuring the AstroNvim User Interface
 -- Configuration documentation can be found with `:h astroui`
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
@@ -11,14 +9,30 @@ return {
   ---@type AstroUIOpts
   opts = {
     -- change colorscheme
-    colorscheme = "astrodark",
+    colorscheme = "astromars",
+    -- colorscheme = "retrobox",
+    -- colorscheme = "slate",
+    -- colorscheme = "habamax",
+    -- colorscheme = "astrodark",
     -- AstroUI allows you to easily modify highlight groups easily for any and all colorschemes
     highlights = {
       init = { -- this table overrides highlights in all themes
         -- Normal = { bg = "#000000" },
       },
-      astrodark = { -- a table of overrides/changes when applying the astrotheme theme
-        -- Normal = { bg = "#000000" },
+      astromars = { -- a table of overrides/changes when applying the astrotheme theme
+        -- set the transparency for all of these highlight groups
+        Normal = { bg = "NONE", ctermbg = "NONE" }, -- NONE means transparent
+        NormalNC = { bg = "NONE", ctermbg = "NONE" },
+        CursorColumn = { cterm = {}, ctermbg = "NONE", ctermfg = "NONE" },
+        CursorLine = { cterm = {}, ctermbg = "NONE", ctermfg = "NONE" },
+        CursorLineNr = { cterm = {}, ctermbg = "NONE", ctermfg = "NONE" },
+        LineNr = {},
+        SignColumn = {},
+        StatusLine = {},
+        NeoTreeNormal = { bg = "NONE", ctermbg = "NONE" },
+        NeoTreeNormalNC = { bg = "NONE", ctermbg = "NONE" },
+        -- line right below the tabline
+        WinBar = { bg = "NONE", ctermbg = "NONE" },
       },
     },
     -- Icons can be configured throughout the interface
