@@ -1,5 +1,3 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
 -- AstroCore provides a central place to modify mappings, vim options, autocommands, and more!
 -- Configuration documentation can be found with `:h astrocore`
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
@@ -60,12 +58,44 @@ return {
           desc = "Close buffer from tabline",
         },
 
+        ["<Leader>j"] = { "<cmd>HopChar1<cr>", desc = "Move cursor to char" },
+        ["<Leader>x"] = { "<cmd>w | split | terminal ./test.sh<cr>", desc = "Run ./test.sh" },
+        ["<Leader>m"] = { "<cmd>HiMyWordsToggle<cr>", desc = "Highlight word" },
+        -- Rust specific mappings:
+        ["<Leader>rt"] = { "<cmd>w | split | terminal cargo test --workspace<cr>", desc = "cargo test" },
+        ["<Leader>rr"] = { "<cmd>w | split | terminal cargo run<cr>", desc = "cargo run" },
+        ["<Leader>rn"] = {
+          function()
+            vim.diagnostic.goto_next()
+          end,
+          desc = "next diagnostic",
+        },
+        -- Hover (i.e., show) symbol (variable) information from LSP
+        ["<Leader>rh"] = {
+          function()
+            vim.lsp.buf.hover()
+          end,
+          desc = "Hover symbol",
+        },
+        ["<Leader>rs"] = {
+          function()
+            vim.lsp.buf.signature_help()
+          end,
+          desc = "Signature help",
+        },
+        ["<Leader>rd"] = {
+          function()
+            vim.lsp.buf.definition()
+          end,
+          desc = "Show definition",
+        },
+
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus
         -- ["<Leader>b"] = { desc = "Buffers" },
 
         -- setting a mapping to false will disable it
-        -- ["<C-S>"] = false,
+        -- ["<C-S>"] = false
       },
     },
   },
