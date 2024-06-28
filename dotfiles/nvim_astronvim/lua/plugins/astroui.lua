@@ -18,8 +18,6 @@ return {
     highlights = {
       init = { -- this table overrides highlights in all themes
         -- Normal = { bg = "#000000" },
-      },
-      astromars = { -- a table of overrides/changes when applying the astrotheme theme
         -- set the transparency for all of these highlight groups
         Normal = { bg = "NONE", ctermbg = "NONE" }, -- NONE means transparent
         NormalNC = { bg = "NONE", ctermbg = "NONE" },
@@ -33,7 +31,14 @@ return {
         NeoTreeNormalNC = { bg = "NONE", ctermbg = "NONE" },
         -- line right below the tabline
         WinBar = { bg = "NONE", ctermbg = "NONE" },
+
+        LspCodeLens = { fg = "#63646a" },
+        LspCodeLensSeparator = { fg = "#63646a" },
+        LspInlayHint = { fg = "#63646a" },
+        SpecialComment = { fg = "#63646a" },
       },
+      -- astromars = { -- a table of overrides/changes when applying the astromars theme
+      -- },
     },
     -- Icons can be configured throughout the interface
     icons = {

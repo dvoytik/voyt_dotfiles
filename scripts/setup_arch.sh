@@ -224,6 +224,7 @@ function setup_nvim_astronvim() {
   # Post installation setup in nvim
   nvim '+LspInstall rust' # install Rust laguage server
   # nvim '+LspInstall c' # install C laguage server
+  # nvim '+LspInstall lua_ls'
   # nvim '+TSInstall rust lua c' # install tree sitter language parsers
 }
 
