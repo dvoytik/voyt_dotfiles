@@ -159,13 +159,14 @@ function install_paru() {
 function install_fonts() {
   cd /var/tmp
   mkdir -p c && cd c
-  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/CascadiaCode.zip
+  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/CascadiaCode.zip
   unzip CascadiaCode.zip
   sudo mkdir -p /usr/local/share/fonts/OTF
-  sudo cp 'Caskaydia Cove Nerd Font Complete Mono Bold.otf' \
-           'Caskaydia Cove Nerd Font Complete Mono Italic.otf' \
-           'Caskaydia Cove Nerd Font Complete Mono Regular.otf' \
-           /usr/local/share/fonts/OTF
+  sudo cp CaskaydiaCoveNerdFontMono-Regular.ttf \
+    CaskaydiaCoveNerdFontMono-Italic.ttf \
+    CaskaydiaCoveNerdFontMono-Bold.ttf \
+    /usr/local/share/fonts/OTF
+
   cd ..
   rm -rf c CascadiaCode.zip
 }
