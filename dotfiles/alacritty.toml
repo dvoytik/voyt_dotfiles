@@ -50,7 +50,7 @@ cursor = "#d8dee9"
 text = "#2e3440"
 
 [font]
-size = 19
+size = 18
 
 [font.bold]
 family = "CaskaydiaCove Nerd Font Mono"
