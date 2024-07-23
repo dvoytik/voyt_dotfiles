@@ -62,6 +62,7 @@ starship init fish | source
 end # if status is-interactive
 
 alias cal='date +%H:%M; /usr/bin/cal -w -m -y'
+alias cal='date +%H:%M; /usr/bin/cal --week --columns=auto -my --color=always | less -RSn'
 
 set LOCAL_CONFIG ~/.config/fish/config_local.fish
 if test -f $LOCAL_CONFIG

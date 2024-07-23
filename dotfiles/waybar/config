@@ -31,7 +31,7 @@
         "format-icons": {
            "1": " ",
            "2": " ",
-           "3": " ",
+           "3": " ",
            "4": " ",
            "5": " ",
            "urgent": " ",
@@ -103,7 +103,7 @@
         "spacing": 10
     },
     "clock": {
-        "format": "{:%Y-%m-%d  %H:%M}",
+        "format": "{:%b %d  %H:%M}",
         //"format-alt": "{:%Y-%m-%d}"
         "on-click": "alacritty -e fish -c 'date +%H:%M; cal; read'",
         // uncomment in newer versions:
@@ -114,11 +114,11 @@
         //"format-calendar-weekdays": "<span color='#ffcc66'><b>{}</b></span>",
     },
     "cpu": {
-        "format": "{usage}% ",
+        "format": "{usage}% ",
         "tooltip": true
     },
     "memory": {
-        "format": "{}% "
+        "format": "{}% "
     },
     "temperature": {
         // "thermal-zone": 2,
@@ -193,7 +193,7 @@
     },
     // Screen shot button:
     "custom/grimshot": {
-        "format": " ",
+        "format": "󰹑 ",
         "tooltip": false,
         "on-click": "grimshot --notify save output - | swappy -f -",
         "on-click-middle": "grimshot --notify save window - | swappy -f -",
