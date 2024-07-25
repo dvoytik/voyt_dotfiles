@@ -95,6 +95,40 @@ function arch_system_setup() {
 # * nvim /etc/security/faillock.conf
 }
 
+function arch_setup_security() {
+  sudo pacman -S firejail apparmor
+  sudo systemctl enable apparmor
+
+  # ↪ zgrep CONFIG_LSM= /proc/config.gz
+  # sudo nvim /etc/default/grub
+  # change:
+  # GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"
+  # to:
+  # GRUB_CMDLINE_LINUX_DEFAULT="lsm=landlock,lockdown,yama,integrity,apparmor,bpf loglevel=3 quiet"
+
+  #
+  # grub-mkconfig -o /boot/grub/grub.cfu
+  # reboot
+  # check by running:
+  # aa-enabled
+  # Should return: Yes
+
+  sudo sh -c 'echo "firejail --profile=brave /usr/bin/brave" > /usr/local/bin/brave'
+  sudo chmod +x /usr/local/bin/brave
+
+  sudo sh -c 'echo "firejail --profile=telegram-desktop /usr/local/bin/Telegram" > /usr/local/bin/telegram'
+  sudo chmod +x /usr/local/bin/telegram
+}
+
+function setup_microcode() {
+  # check AMD ucode:
+  # journalctl -k --grep='microcode:'
+  # Should return:
+  # kernel: microcode: Current revision: 0x0a500011
+  # kernel: microcode: Updated early from: 0x0a50000b
+}
+
+
 function install_setup_keyd() {
   # laptop keyboard
   sudo cp dotfiles/keyd/keyd.conf /etc/keyd/default.conf
