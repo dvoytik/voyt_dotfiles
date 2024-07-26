@@ -95,7 +95,8 @@ function arch_system_setup() {
 # * nvim /etc/security/faillock.conf
 }
 
-function arch_setup_security() {
+# setup sandboxing - improves security
+function arch_setup_firejail_apparmor() {
   sudo pacman -S firejail apparmor
   sudo systemctl enable apparmor
 
@@ -113,20 +114,32 @@ function arch_setup_security() {
   # aa-enabled
   # Should return: Yes
 
-  sudo sh -c 'echo "firejail --profile=brave /usr/bin/brave" > /usr/local/bin/brave'
+  # edit
+  # sudo nvim /etc/apparmor.d/local/firejail-default
+  # uncomment "brave + tor"
+
+  sudo sh -c 'cat > /usr/local/bin/brave << EOF
+#!/bin/sh
+firejail --profile=brave /usr/bin/brave
+EOF
+'
   sudo chmod +x /usr/local/bin/brave
 
-  sudo sh -c 'echo "firejail --profile=telegram-desktop /usr/local/bin/Telegram" > /usr/local/bin/telegram'
+  sudo sh -c 'cat > /usr/local/bin/telegram << EOF
+#!/bin/sh
+firejail --profile=telegram /usr/local/bin/Telegram
+EOF
+'
   sudo chmod +x /usr/local/bin/telegram
 }
 
-function setup_microcode() {
+# function setup_microcode() {
   # check AMD ucode:
   # journalctl -k --grep='microcode:'
   # Should return:
   # kernel: microcode: Current revision: 0x0a500011
   # kernel: microcode: Updated early from: 0x0a50000b
-}
+# }
 
 
 function install_setup_keyd() {
@@ -495,3 +508,4 @@ function setup_i3() {
 #setup_grub
 #install_screenshot_tools
 # setup_time_sync
+# arch_setup_firejail_apparmor
