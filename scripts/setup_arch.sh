@@ -458,6 +458,19 @@ function setup_nvidia_proprietary_driver() {
   # mkinitcpio -p linux
 }
 
+function setup_hp_omen_laptop() {
+  # fan control
+  sudo pacman -S \
+    python-click \
+    python-click-aliases \
+    python-tomlkit
+
+  git clone https://github.com/alou-S/omen-fan.git
+  # cd omen-fan
+  # setup CPU fan to 20% and GPU fan to 0%
+  # sudo ./omen-fan.py set 20 0
+}
+
 function setup_i3() {
   sudo pacman -S \
     i3 \
@@ -509,3 +522,4 @@ function setup_i3() {
 #install_screenshot_tools
 # setup_time_sync
 # arch_setup_firejail_apparmor
+# setup_hp_omen_laptop
