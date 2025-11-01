@@ -76,7 +76,9 @@ function install_user_packages() {
     brave-bin \
     pass-coffin \
     xdg-utils-handlr \
-    warpd-wayland
+    warpd-wayland \
+    # tui file manager
+    yazi \
 
   # for laptop:
     #tlp \
@@ -204,18 +206,13 @@ function install_paru() {
 }
 
 function install_fonts() {
-  cd /var/tmp
-  mkdir -p c && cd c
-  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/CascadiaCode.zip
-  unzip CascadiaCode.zip
-  sudo mkdir -p /usr/local/share/fonts/OTF
-  sudo cp CaskaydiaCoveNerdFontMono-Regular.ttf \
-    CaskaydiaCoveNerdFontMono-Italic.ttf \
-    CaskaydiaCoveNerdFontMono-Bold.ttf \
-    /usr/local/share/fonts/OTF
+  install_fonts_cascadia
+}
 
-  cd ..
-  rm -rf c CascadiaCode.zip
+function install_fonts_cascadia() {
+  paru -S ttf-cascadia-code-nerd
+  # update font cache:
+  fc-cache -f
 }
 
 function setup_fonts() {

@@ -50,18 +50,21 @@ cursor = "#d8dee9"
 text = "#2e3440"
 
 [font]
-size = 18
+size = 19
 
 [font.bold]
-family = "CaskaydiaCove Nerd Font Mono"
+# family = "CaskaydiaCove Nerd Font Mono"
+family = "CaskaydiaCove NFM"
 style = "Bold"
 
 [font.italic]
-family = "CaskaydiaCove Nerd Font Mono"
+# family = "CaskaydiaCove Nerd Font Mono"
+family = "CaskaydiaCove NFM"
 style = "Italic"
 
 [font.normal]
-family = "CaskaydiaCove Nerd Font Mono"
+# family = "CaskaydiaCove Nerd Font Mono"
+family = "CaskaydiaCove NFM"
 style = "Regular"
 
 [scrolling]
