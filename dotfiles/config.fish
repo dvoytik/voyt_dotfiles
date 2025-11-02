@@ -26,6 +26,9 @@ export EDITOR=(which nvim)
 #alias fd="fdfind"
 alias v=nvim
 
+# File manager is yazi
+alias fm=yazi
+
 # fuzzy find files by names with nvim
 alias vff="nvim '+Telescope fd'"
 # alias vff='nvim (fzf)'
@@ -35,6 +38,11 @@ alias r='less'
 
 # print last downloaded files
 alias ldf 'echo $HOME/Downloads/(ls -trh ~/Downloads/ | tail -n1)'
+
+# show list of recent files in nvim Telescope
+alias rf='nvim -c "Telescope oldfiles"'
+# show and copy full path of any file:
+function rl; readlink -f $argv | wl-copy; wl-paste; end
 
 # Directory listing
 function ll
