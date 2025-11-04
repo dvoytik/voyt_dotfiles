@@ -26,8 +26,15 @@ export EDITOR=(which nvim)
 #alias fd="fdfind"
 alias v=nvim
 
-# File manager is yazi
-alias fm=yazi
+# TUI File manager is yazi. The following function is required to cd for the last picked dir:
+function fm
+	set tmp (mktemp -t "yazi-cwd.XXXXXX")
+	yazi $argv --cwd-file="$tmp"
+	if read -z cwd < "$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+		builtin cd -- "$cwd"
+	end
+	rm -f -- "$tmp"
+end
 
 # fuzzy find files by names with nvim
 alias vff="nvim '+Telescope fd'"

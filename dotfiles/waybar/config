@@ -16,10 +16,8 @@
         "temperature",
         "memory",
         "backlight",
-        "keyboard-state",
         "sway/language",
         "battery",
-        "battery#bat2",
         "tray",
         "clock"
     ],
@@ -50,12 +48,12 @@
        }
     },
     "keyboard-state": {
-        "numlock": true,
+        "numlock": false,
         "capslock": true,
         "format": "{name} {icon}",
         "format-icons": {
-            "locked": "",
-            "unlocked": ""
+            "locked": " ",
+            "unlocked": " "
         }
     },
     "sway/language": {
@@ -103,7 +101,7 @@
         "spacing": 10
     },
     "clock": {
-        "format": "{:%b %d  %H:%M}",
+        "format": "{:%Y-%m-%d  %H:%M}",
         //"format-alt": "{:%Y-%m-%d}"
         "on-click": "alacritty -e fish -c 'date +%H:%M; cal; read'",
         // uncomment in newer versions:
@@ -114,20 +112,22 @@
         //"format-calendar-weekdays": "<span color='#ffcc66'><b>{}</b></span>",
     },
     "cpu": {
-        "format": "{usage}% ",
+        "format": "{usage}% 󰻠",
         "tooltip": true
     },
     "memory": {
-        "format": "{}% "
+        "format": "{}% "
     },
     "temperature": {
         // "thermal-zone": 2,
         // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        "hwmon-path": "/sys/class/thermal/thermal_zone0/temp",
+        // "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+        // Dell 5690:
+        "hwmon-path": "/sys/class/thermal/thermal_zone15/temp",
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
         "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
+        "format-icons": [""]
     },
     "backlight": {
         // "device": "acpi_video1",
@@ -141,8 +141,10 @@
             "critical": 15
         },
         "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
+        "format-charging": "{capacity}% 󱊥",
+        // "format-plugged": "{capacity}% ",
+        // Show nothing when plugged:
+        "format-plugged": "",
         "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
@@ -154,9 +156,9 @@
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%)  ",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
+        "format-ethernet": "{ipaddr}/{cidr} 󰈀",
+        "tooltip-format": "{ifname} via {gwaddr} 󰈀",
+        "format-linked": "{ifname} (No IP) 󰈀",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
@@ -164,14 +166,14 @@
         // "scroll-step": 1, // %, can be a float
         "format": "{volume}% {icon} {format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
+        "format-bluetooth-muted": "󰗿 {icon} {format_source}",
+        "format-muted": "󰗿 {format_source}",
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
-            "hands-free": "",
-            "headset": "",
+            "hands-free": "",
+            "headset": "",
             "phone": "",
             "portable": "",
             "car": "",
@@ -194,7 +196,8 @@
     // Screen shot button:
     "custom/grimshot": {
         "format": "󰹑 ",
-        "tooltip": false,
+        "tooltip": true,
+        "tooltip-format": "Click for screen shot",
         "on-click": "grimshot --notify save output - | swappy -f -",
         "on-click-middle": "grimshot --notify save window - | swappy -f -",
         "on-click-right": "grimshot --notify save area - | swappy -f -"
