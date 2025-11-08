@@ -264,7 +264,7 @@ function setup_nvim_astronvim() {
   cargo install tree-sitter-cli
   #install_lazygit
 
-  ln -s /home/voyt/p/voyt_dotfiles/dotfiles/nvim_astronvim/ ~/.config/nvim
+  ln -s /home/voyt/p/voyt_dotfiles/dotfiles/nvim_astronvim/ ~/.config/nvim-astronvim
 
   # Post installation setup in nvim
   nvim '+LspInstall rust' # install Rust laguage server

@@ -23,7 +23,10 @@ export EDITOR=(which nvim)
 #############################################################################
 # common aliases
 #
-#alias fd="fdfind"
+
+# neovim with astronvim distribution
+alias va='NVIM_APPNAME="nvim-astronvim" nvim'
+
 alias v=nvim
 
 # TUI File manager is yazi. The following function is required to cd for the last picked dir:
