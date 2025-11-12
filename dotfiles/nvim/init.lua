@@ -160,7 +160,10 @@ rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+  {
+    'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+    opts = {},
+  },
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -278,6 +281,7 @@ require('lazy').setup({
         { '<leader>s', group = '[S]earch' },
         { '<leader>t', group = '[T]oggle' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        { '<leader>r', group = 'Rust', mode = { 'n', 'v' } },
       },
     },
   },
@@ -292,6 +296,7 @@ require('lazy').setup({
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
+    lazy = false,
     dependencies = {
       'nvim-lua/plenary.nvim',
       { -- If encountering errors, see telescope-fzf-native README for installation instructions
@@ -509,11 +514,7 @@ require('lazy').setup({
           ---@param bufnr? integer some lsp support methods only in specific files
           ---@return boolean
           local function client_supports_method(client, method, bufnr)
-            if vim.fn.has 'nvim-0.11' == 1 then
-              return client:supports_method(method, bufnr)
-            else
-              return client.supports_method(method, { bufnr = bufnr })
-            end
+            return client:supports_method(method, bufnr)
           end
 
           -- The following two autocommands are used to highlight references of the
@@ -852,17 +853,17 @@ require('lazy').setup({
   --   end,
   -- },
   -----------------------------------------------------------------------------
-  { -- colorscheme
-    'Mofiqul/vscode.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    config = function()
-      require('vscode').setup {
-        style = 'light',
-        italic_comments = true,
-      }
-      -- vim.cmd.colorscheme 'vscode'
-    end,
-  },
+  -- { -- colorscheme
+  --   'Mofiqul/vscode.nvim',
+  --   priority = 1000, -- Make sure to load this before all the other start plugins.
+  --   config = function()
+  --     require('vscode').setup {
+  --       style = 'light',
+  --       italic_comments = true,
+  --     }
+  --     -- vim.cmd.colorscheme 'vscode'
+  --   end,
+  -- },
   -----------------------------------------------------------------------------
   -- { -- colorscheme
   --   'navarasu/onedark.nvim',
@@ -1021,6 +1022,7 @@ require('lazy').setup({
       },
     },
   },
+  -----------------------------------------------------------------------------
   {
     'dvoytik/hi-my-words.nvim',
     event = 'BufRead',
@@ -1031,10 +1033,9 @@ require('lazy').setup({
         desc = '(Un)highligh word under cursor',
       },
     },
-    config = function()
-      require 'hi-my-words'
-    end,
+    opts = {},
   },
+  -----------------------------------------------------------------------------
   {
     -- The yanky.nvim stores copied text in a ring buffer
     'gbprod/yanky.nvim',
@@ -1238,7 +1239,7 @@ require('lazy').setup({
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
-    -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
+    -- default lazy.nvim defined Nerd Font icons, otherwise define a Unicode icons table
     icons = vim.g.have_nerd_font and {} or {
       cmd = '⌘',
       config = '🛠',
@@ -1277,7 +1278,25 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 -- Toggle comment for the current line or with count
 vim.keymap.set('n', '<leader>/', function()
   return vim.v.count == 0 and '<Plug>(comment_toggle_linewise_current)' or '<Plug>(comment_toggle_linewise_count)'
-end, { expr = true })
+end, { expr = true, desc = 'Toggle comment for the current line' })
 -- Toggle comment in VISUAL mode
 vim.keymap.set('x', '<leader>/', '<Plug>(comment_toggle_linewise_visual)')
+-- Toggle spell checking
+vim.keymap.set('n', '<leader>ts', function()
+  if vim.o.spell then
+    vim.o.spell = false
+    print 'Spell: OFF'
+  else
+    vim.o.spell = true
+    print('Spell: ON (' .. vim.o.spelllang .. ')')
+  end
+end, { desc = 'Toggle Spelling' })
+-- Run smoke test script
+vim.keymap.set('n', '<leader>x', '<Cmd>w | split | terminal ./tests/smoke_test.sh<CR>', { desc = 'Run ./tests/smoke_test.sh' })
+-- Rust key bindings
+vim.keymap.set('n', '<leader>rt', '<cmd>w | split | terminal cargo test --workspace<cr>', { desc = 'cargo test' })
+vim.keymap.set('n', '<leader>rr', '<cmd>w | split | terminal cargo run<cr>', { desc = 'cargo run' })
+vim.keymap.set('n', '<leader>rn', function()
+  vim.diagnostic.jump { count = 1, float = true }
+end, { desc = 'next diagnostic' })
 -------------------------------------------------------------------------------

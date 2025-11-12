@@ -237,8 +237,8 @@ bindsym $mod+Control+Shift+h move workspace to output left
 bindsym $mod+Control+Shift+Down move workspace to output down
 bindsym $mod+Control+Shift+Up move workspace to output up
 ####################################################################################################
-
-bindsym $mod+Ctrl+s exec systemctl suspend
+# -i - don't check inhibitors like another loged in user
+bindsym $mod+Ctrl+s exec systemctl suspend -i
 ####################################################################################################
 #
 # Status Bar:
@@ -269,15 +269,12 @@ for_window [app_id="^brave-.*"] shortcuts_inhibitor disable
 ####################################################################################################
 # Clapboard - remember clipboard
 # sit in background and store copied text
-exec wl-paste --watch bash -c "xargs -0 -I{} clapboard store {}"
-# watch primary clipboard (selection and mouse middle click)
-# exec wl-paste --primary --watch bash -c "xargs -0 -I{} clapboard store {}"
-
-#bindsym $mod+c exec clapboard
+exec clapboard --record
+bindsym $mod+c exec clapboard
 ####################################################################################################
-bindsym $mod+x exec warpd --hint
-bindsym $mod+c exec warpd --normal
-bindsym $mod+g exec warpd --grid --oneshot
+# bindsym $mod+x exec warpd --hint
+# bindsym $mod+c exec warpd --normal
+# bindsym $mod+g exec warpd --grid --oneshot
 ####################################################################################################
 # Autostart
 #

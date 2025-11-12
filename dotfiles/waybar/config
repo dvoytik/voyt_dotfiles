@@ -19,6 +19,7 @@
         "sway/language",
         "battery",
         "tray",
+        "custom/weather",
         "clock"
     ],
     // Modules configuration
@@ -112,11 +113,11 @@
         //"format-calendar-weekdays": "<span color='#ffcc66'><b>{}</b></span>",
     },
     "cpu": {
-        "format": "{usage}% 󰻠",
+        "format": "{usage}% ",
         "tooltip": true
     },
     "memory": {
-        "format": "{}% "
+        "format": "{}% "
     },
     "temperature": {
         // "thermal-zone": 2,
@@ -201,6 +202,13 @@
         "on-click": "grimshot --notify save output - | swappy -f -",
         "on-click-middle": "grimshot --notify save window - | swappy -f -",
         "on-click-right": "grimshot --notify save area - | swappy -f -"
+    },
+    "custom/weather": {
+        "format": "{}°",
+        "tooltip": true,
+        "interval": 3600,
+        "exec": "wttrbar --location Putzbrunn",
+        "return-type": "json"
     },
 }
 

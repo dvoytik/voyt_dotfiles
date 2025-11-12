@@ -77,6 +77,8 @@ function install_user_packages() {
     pass-coffin \
     xdg-utils-handlr \
     warpd-wayland \
+    # weather widget for waybar
+    wttrbar \
     # tui file manager
     yazi \
 
@@ -291,6 +293,7 @@ function install_sway() {
     slurp \
     grim
   # pulseaudio-utils \
+  # waylock \
 }
 
 function setup_sway() {
