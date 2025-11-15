@@ -102,22 +102,37 @@
         "spacing": 10
     },
     "clock": {
-        "format": "{:%Y-%m-%d  %H:%M}",
+        "format": "{:%m-%d %a %H:%M}",
         //"format-alt": "{:%Y-%m-%d}"
         "on-click": "alacritty -e fish -c 'date +%H:%M; cal; read'",
-        // uncomment in newer versions:
-        //"today-format": "<span color='#ff6699'><b><u>{%D}</u></b></span>",
-        //"calendar-weeks-pos": "right",
-        //"format-calendar": "<span color='#ecc6d9'><b>{}</b></span>",
-        //"format-calendar-weeks": "<span color='#99ffdd'><b>W{:%U}</b></span>",
-        //"format-calendar-weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode"          : "year",
+            "mode-mon-col"  : 3,
+            "weeks-pos"     : "right",
+            "on-scroll"     : 1,
+            "format": {
+                "months":     "<span color='#ffead3'><b>{}</b></span>",
+                "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions":  {
+            "on-click-right": "mode",
+            "on-scroll-up": "tz_up",
+            "on-scroll-down": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
     },
     "cpu": {
-        "format": "{usage}% ",
+        "format": " {usage}%",
         "tooltip": true
     },
     "memory": {
-        "format": "{}% "
+        "format": " {}% "
     },
     "temperature": {
         // "thermal-zone": 2,
@@ -127,12 +142,12 @@
         "hwmon-path": "/sys/class/thermal/thermal_zone15/temp",
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
-        "format": "{temperatureC}°C {icon}",
+        "format": "{icon} {temperatureC}°C",
         "format-icons": [""]
     },
     "backlight": {
         // "device": "acpi_video1",
-        "format": "{percent}% {icon}",
+        "format": "{icon} {percent}%",
         "format-icons": ["", "", "", "", "", "", "", "", ""]
     },
     "battery": {
@@ -156,7 +171,7 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%)  ",
+        "format-wifi": "  {signalStrength}%",
         "format-ethernet": "{ipaddr}/{cidr} 󰈀",
         "tooltip-format": "{ifname} via {gwaddr} 󰈀",
         "format-linked": "{ifname} (No IP) 󰈀",
@@ -165,11 +180,11 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
+        "format": "{icon} {volume}% {format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": "󰗿 {icon} {format_source}",
         "format-muted": "󰗿 {format_source}",
-        "format-source": "{volume}% ",
+        "format-source": " {volume}%",
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
@@ -178,7 +193,7 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["", "", ""]
+            "default": [" ", " ", " "]
         },
         "on-click": "pavucontrol"
     },

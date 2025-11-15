@@ -1,10 +1,18 @@
 * {
     border: none;
-    border-radius: 4px;
-    /* `otf-font-awesome` is required to be installed for icons */
-    font-family: CaskaydiaCove Nerd Font, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-    font-size: 24px;
+    border-radius: 10px;
+    border-radius: 0px;
+    font-family: CaskaydiaCove NF;
+    font-size: 20px;
+    min-height: 0;
+    /* shadow is required for light wallpapers: */
+    /* text-shadow: 2px 2px 3px black; */
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
+
+/* different screen
+window.eDP-1 * { font-size: 10px; }
+*/
 
 window#waybar {
     background-color: rgba(43, 48, 59, 0.0);
@@ -81,11 +89,14 @@ window#waybar.chromium {
 #tray,
 #mode,
 #idle_inhibitor,
+#custom-weather,
+#language,
 #mpd {
     padding: 0 10px;
     margin: 6px 3px;
-    /*color: #ffffff;*/
-    color: #333333;
+    color: #ffffff;
+    background-color: rgba(255,255,255,0.2); /* transparent */
+    border-radius: 5px;
 }
 
 #window,
@@ -101,15 +112,6 @@ window#waybar.chromium {
 /* If workspaces is the rightmost module, omit right margin */
 .modules-right > widget:last-child > #workspaces {
     margin-right: 0;
-}
-
-#clock {
-    background-color: #bbccdd;
-}
-
-#battery {
-    background-color: #bbccdd;
-    color: #000000;
 }
 
 #battery.charging, #battery.plugged {
@@ -138,34 +140,8 @@ label:focus {
     background-color: #000000;
 }
 
-#cpu {
-    background-color: #bbccdd;
-    color: #000000;
-}
-
-#memory {
-    background-color: #bbccdd;
-}
-
-#disk {
-    background-color: #964B00;
-}
-
-#backlight {
-    background-color: #90b1b1;
-}
-
-#network {
-    background-color: #bbccdd;
-}
-
 #network.disconnected {
     background-color: #f53c3c;
-}
-
-#pulseaudio {
-    background-color: #bbccdd;
-    color: #000000;
 }
 
 #pulseaudio.muted {
@@ -187,16 +163,8 @@ label:focus {
     background-color: #ffa000;
 }
 
-#temperature {
-    background-color: #bbccdd;
-}
-
 #temperature.critical {
     background-color: #eb4d4b;
-}
-
-#tray {
-    background-color: #bbccdd;
 }
 
 #tray > .passive {
@@ -208,51 +176,12 @@ label:focus {
     background-color: #eb4d4b;
 }
 
-#idle_inhibitor {
-    background-color: #2d3436;
-    color: #ecf0f1;
-}
-
-#idle_inhibitor.activated {
-    background-color: #ecf0f1;
-    color: #2d3436;
-}
-
-#mpd {
-    background-color: #66cc99;
-    color: #2a5c45;
-}
-
-#mpd.disconnected {
-    background-color: #f53c3c;
-}
-
-#mpd.stopped {
-    background-color: #90b1b1;
-}
-
-#mpd.paused {
-    background-color: #51a37a;
-}
-
-#language {
-    background-color: #bbccdd;
-    color: #333333;
-    padding: 0 5px;
-    margin: 6 3px;
-    min-width: 16px;
-}
-
-#keyboard-state {
-    padding: 0 0px;
-    margin: 0 5px;
-    min-width: 16px;
-}
-
-#keyboard-state > label {
-    padding: 0 5px;
-}
-
-#keyboard-state > label.locked {
-    background: rgba(0, 0, 0, 0.2);
+/* show backlight module only on the laptop screen: */
+window.HDMI-A-1 #backlight { 
+    /* display:none; is not supported, hence the hack: */
+    color: #00ff00;
+    margin: 0px;
+    padding: 0px;
+    font-size: 0px;
+    opacity: 0;
 }
