@@ -6,6 +6,22 @@
 
 # exec_always xrdb -load ~/.Xresources
 
+####################################################################################################
+# define display output names
+set $disp_laptop "eDP-1"
+set $disp_ext "HDMI-A-1"
+workspace 1 output $disp_ext
+workspace 2 output $disp_ext
+workspace 3 output $disp_ext
+workspace 4 output $disp_ext
+workspace 5 output $disp_laptop
+workspace 6 output $disp_ext
+workspace 7 output $disp_ext
+workspace 8 output $disp_ext
+workspace 9 output $disp_laptop
+workspace 10 output $disp_laptop
+####################################################################################################
+
 # Xwayland - an X server for running X clients under Wayland.
 xwayland enable
 
@@ -276,6 +292,7 @@ bindsym $mod+c exec clapboard
 # bindsym $mod+c exec warpd --normal
 # bindsym $mod+g exec warpd --grid --oneshot
 ####################################################################################################
+
 # Autostart
 #
 # Peripherals
@@ -297,8 +314,8 @@ exec blueman-applet
 #exec lxpolkit
 #exec gnome-keyring-daemon --start -bindsym-components=pkcs11
 
-exec swaymsg "workspace 1; exec alacritty -e tmux attach"
-exec swaymsg "workspace 2; exec brave --restore-last-session;"
 # exec sleep 1.2 && swaymsg "resize set width 1600px"
 #exec swaymsg "workspace 4; brave-browser --new-window --app=slack.com; workspace 1"
 #exec swaymsg "workspace 2; exec $term; workspace 1"
+exec 'sleep 0.1; swaymsg workspace 1; alacritty -e tmux attach'
+exec 'sleep 0.2; swaymsg workspace 2; brave --restore-last-session'
