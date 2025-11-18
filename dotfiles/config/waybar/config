@@ -222,7 +222,7 @@
         "format": "{}°",
         "tooltip": true,
         "interval": 3600,
-        "exec": "wttrbar --location Putzbrunn",
+        "exec": "wttrbar --nerd --location Putzbrunn",
         "return-type": "json"
     },
 }
