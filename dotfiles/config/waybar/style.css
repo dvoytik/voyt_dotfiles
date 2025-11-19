@@ -5,9 +5,7 @@
     font-family: CaskaydiaCove NF;
     font-size: 20px;
     min-height: 0;
-    /* shadow is required for light wallpapers: */
-    /* text-shadow: 2px 2px 3px black; */
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    /* text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; */
 }
 
 /* Increase font on the bigger screen */
@@ -95,7 +93,7 @@ window#waybar.chromium {
     padding: 1px 5px;
     margin: 3px 3px;
     color: #ffffff;
-    background-color: rgba(255,255,255,0.2); /* transparent */
+    background-color: rgba(0x64,0x72,0x7d,0.8); /* transparent */
     border-radius: 5px;
 }
 
@@ -105,6 +103,12 @@ window#waybar.chromium {
     margin: 3px 3px;
     color: #ffffff;
     border-radius: 5px;
+}
+
+#custom-weather {
+    padding: 0px 5px;
+    margin: 3px 3px;
+    font-size: 19px;
 }
 
 #window,

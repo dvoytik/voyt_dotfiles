@@ -219,11 +219,10 @@
         "on-click-right": "grimshot --notify save area - | swappy -f -"
     },
     "custom/weather": {
-        "format": "{}°",
+        "format": "{}",
         "tooltip": true,
         "interval": 3600,
-        "exec": "wttrbar --nerd --location Putzbrunn",
-        "return-type": "json"
+        "exec": "curl https://wttr.in/Putzbrunn?format=1; curl https://wttr.in/Putzbrunn?format=4",
+        "on-click": "alacritty -e fish -c 'curl v2n.wttr.in/Putzbrunn; read'",
     },
 }
-
