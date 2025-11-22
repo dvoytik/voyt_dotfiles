@@ -1209,6 +1209,20 @@ require('lazy').setup({
   },
   --- end of nvim-dap plugin
   -----------------------------------------------------------------------------
+  {
+    'brenoprata10/nvim-highlight-colors',
+    -- event = { 'BufRead', 'InsertEnter' },
+    cmd = 'HighlightColors',
+    opts = {
+      enable_named_colors = false,
+      virtual_symbol = '󱓻',
+      -- Disable for files > 1 MB
+      exclude_buffer = function(bufnr)
+        return vim.fn.getfsize(vim.api.nvim_buf_get_name(bufnr)) > 1000000
+      end,
+    },
+  },
+  -----------------------------------------------------------------------------
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
@@ -1291,6 +1305,10 @@ vim.keymap.set('n', '<leader>ts', function()
     print('Spell: ON (' .. vim.o.spelllang .. ')')
   end
 end, { desc = 'Toggle Spelling' })
+-- Toggle highlight colors
+vim.keymap.set('n', '<leader>tc', function()
+  vim.cmd.HighlightColors 'Toggle'
+end, { desc = 'Toggle highlight colors' })
 -- Run smoke test script
 vim.keymap.set('n', '<leader>x', '<Cmd>w | split | terminal ./tests/smoke_test.sh<CR>', { desc = 'Run ./tests/smoke_test.sh' })
 -- Rust key bindings
