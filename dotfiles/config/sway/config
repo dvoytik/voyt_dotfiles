@@ -285,7 +285,7 @@ for_window [app_id="^brave-.*"] shortcuts_inhibitor disable
 ####################################################################################################
 # Clapboard - remember clipboard
 # sit in background and store copied text
-exec clapboard --record
+exec clapboard --record clipboard
 bindsym $mod+c exec clapboard
 ####################################################################################################
 # bindsym $mod+x exec warpd --hint

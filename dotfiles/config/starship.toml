@@ -1,9 +1,9 @@
 format = """
-[](#9A348E)\
+[](black)\
 $username\
-[](bg:#DA627D fg:#9A348E)\
+[](bg:#AFD787 fg:black)\
 $directory\
-[](fg:#DA627D bg:#FCA17D)\
+[](fg:#AFD787 bg:#FCA17D)\
 $git_branch\
 $git_status\
 [](fg:#FCA17D bg:#86BBD8)\
@@ -20,6 +20,9 @@ $cmd_duration\
 [](fg:#6f618b fg:#6f618b)
 [↪ ](fg:#33658A)\
 """
+# #AFD787
+# #DA627D
+# #9A348E
 
 # Disable the blank line at the start of the prompt
 add_newline = false
@@ -53,12 +56,12 @@ disabled = true
 # You can also replace your username with a neat symbol like  to save some space
 [username]
 show_always = true
-style_user = "bold bg:#9A348E fg:#FFF27D"
+style_user = "bold bg:black fg:#FFF27D"
 style_root = "bg:#9A348E fg:#AAF27D"
 format = '[$user]($style)'
 
 [directory]
-style = "bg:#DA627D"
+style = "bg:#AFD787"
 read_only = ""
 format = "[ $path ]($style)"
 truncation_symbol = "…/"
