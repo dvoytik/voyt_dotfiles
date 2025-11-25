@@ -295,6 +295,7 @@ require('lazy').setup({
 
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
+    version = '0.2.0',
     event = 'VimEnter',
     lazy = false,
     dependencies = {
@@ -1317,9 +1318,9 @@ end, { desc = 'Toggle highlight colors' })
 -- Run smoke test script
 vim.keymap.set('n', '<leader>x', '<Cmd>w | split | terminal ./tests/smoke_test.sh<CR>', { desc = 'Run ./tests/smoke_test.sh' })
 -- Rust key bindings
-vim.keymap.set('n', '<leader>rt', '<cmd>w | split | terminal cargo test --workspace<cr>', { desc = 'cargo test' })
-vim.keymap.set('n', '<leader>rr', '<cmd>w | split | terminal cargo run<cr>', { desc = 'cargo run' })
+vim.keymap.set('n', '<leader>rt', '<cmd>w | split | terminal cargo test --workspace<cr>', { desc = 'Rust - cargo test' })
+vim.keymap.set('n', '<leader>rr', '<cmd>w | split | terminal cargo run<cr>', { desc = 'Rust - cargo run' })
 vim.keymap.set('n', '<leader>rn', function()
   vim.diagnostic.jump { count = 1, float = true }
-end, { desc = 'next diagnostic' })
+end, { desc = 'Rust - Show Next Diagnostic' })
 -------------------------------------------------------------------------------

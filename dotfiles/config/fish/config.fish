@@ -39,9 +39,21 @@ function fm
     rm -f -- "$tmp"
 end
 
-# fuzzy find files by names with nvim
-alias vff="nvim '+Telescope fd'"
-# alias vff='nvim (fzf)'
+# Neovim Old Files - show "Old files" - recently opened files in nvim:
+function vof
+    # vim.defer_fn is workaround for broken Telescope plugin
+    nvim -c ':lua vim.defer_fn(function() vim.cmd(":Telescope oldfiles") end, 100)'
+end
+# Neovim FinD - fuzzy find files by names with nvim
+function vfd
+    # vim.defer_fn is workaround for broken Telescope plugin
+    nvim -c ':lua vim.defer_fn(function() vim.cmd(":Telescope fd") end, 100)'
+end
+# Neovim Live Grep
+function vlg
+    # vim.defer_fn is workaround for broken Telescope plugin
+    nvim -c ':lua vim.defer_fn(function() vim.cmd(":Telescope live_grep") end, 100)'
+end
 
 alias less='less -F -N -R --use-color --line-num-width 3 --redraw-on-quit'
 alias r='less'
@@ -52,8 +64,6 @@ function ldf
     echo $HOME/Downloads/(ls -trh ~/Downloads/ | tail -n1) | wl-copy; wl-paste -n
 end
 
-# show list of recent files in nvim Telescope
-alias rf='nvim -c "Telescope oldfiles"'
 # show and copy full path of any file:
 function rl; readlink -f $argv | wl-copy; wl-paste; end
 
