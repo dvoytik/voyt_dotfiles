@@ -61,9 +61,7 @@ set $menu wofi --show
 include /etc/sway/config-vars.d/*
 
 ### Output configuration
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-exec swaymsg 'output * bg $(find ~/Pictures/dark_wallpapers/ -type f | shuf -n1) fill'
+exec swaymsg 'output * bg $(find ~/Pictures/wallpapers/current_wallpapers -type f | shuf -n1) fill'
 
 #
 # Example configuration:

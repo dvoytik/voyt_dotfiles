@@ -61,6 +61,13 @@ for i in `seq 0 127`; do
 	echo -en $(($i % 10))
 done
 echo
+for i in `seq 0 127`; do
+    if [ $i -eq 100 ]; then
+        echo "100"
+        break
+    fi
+    echo -en ' '
+done
 
 for i in `seq 0 127`; do
     setBackgroundColor $i 0 0

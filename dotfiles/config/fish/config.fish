@@ -62,7 +62,7 @@ function ll
     exa -l --classify --color=always $argv | less
 end
 function llt
-    exa -l --classify --sort=modified --color=always $argv | less
+    exa -l --classify --sort=modified --color=always $argv
 end
 function tree
     exa --tree --classify --color=always $argv | less

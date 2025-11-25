@@ -1,19 +1,18 @@
 format = """
-[](black)\
+[](#776B5D)\
 $username\
-[](bg:#AFD787 fg:black)\
+[](bg:#B0A695 fg:#776B5D)\
 $directory\
-[](fg:#AFD787 bg:#FCA17D)\
+[](fg:#B0A695 bg:#776B5D)\
 $git_branch\
 $git_status\
-[](fg:#FCA17D bg:#86BBD8)\
+[](fg:#776B5D bg:#B0A695)\
 $c\
 $golang\
 $java\
 $rust\
-[](fg:#86BBD8 bg:#6f618b)\
+[](fg:#B0A695)\
 $status\
-[](fg:#6f618b)\
 $fill\
 [](fg:#6f618b fg:#6f618b)\
 $cmd_duration\
@@ -23,6 +22,10 @@ $cmd_duration\
 # #AFD787
 # #DA627D
 # #9A348E
+# #BEC6A0
+# #9BB0C1
+# #6f618b
+# #B0A695
 
 # Disable the blank line at the start of the prompt
 add_newline = false
@@ -34,18 +37,18 @@ disabled = false
 
 [cmd_duration]
 min_time = 1
-style = "bg:#6f618b fg:white"
+style = "bg:#6f618b fg:#ffffff"
 format = '[$duration]($style)'
 #show_notifications = true
-#show_milliseconds = true
+show_milliseconds = true
 #min_time_to_notify = 1
 
 [status]
-style = "bold bg:#6f618b fg:white"
-symbol = "✖"
+style = "bold fg:red"
+symbol = "🔴"
 success_symbol = ""
 #format = '[\[$symbol$common_meaning$signal_name$maybe_int\]]($style) '
-format = "[ $symbol $status]($style)"
+format = "[ $symbol Exit code: $status]($style)"
 map_symbol = true
 disabled = false
 
@@ -56,12 +59,12 @@ disabled = true
 # You can also replace your username with a neat symbol like  to save some space
 [username]
 show_always = true
-style_user = "bold bg:black fg:#FFF27D"
+style_user = "bold bg:#776B5D fg:#ffffff"
 style_root = "bg:#9A348E fg:#AAF27D"
 format = '[$user]($style)'
 
 [directory]
-style = "bg:#AFD787"
+style = "bg:#B0A695"
 read_only = ""
 format = "[ $path ]($style)"
 truncation_symbol = "…/"
@@ -93,21 +96,21 @@ format = '[ $symbol $context ]($style) $path'
 
 [git_branch]
 symbol = ""
-style = "bg:#FCA17D fg:black"
+style = "bg:#776B5D fg:#ffffff"
 format = '[ $symbol $branch ]($style)'
 
 [git_status]
-style = "bg:#FCA17D fg:black"
+style = "bg:#776B5D fg:#ffffff"
 format = '[$all_status$ahead_behind ]($style)'
 
 [golang]
 symbol = " "
-style = "bg:#86BBD8"
+style = "bg:#B0A695"
 format = '[ $symbol ($version) ]($style)'
 
 [rust]
 symbol = ""
-style = "bg:#86BBD8"
+style = "bg:#B0A695"
 format = '[ $symbol ($version) ]($style)'
 
 [time]
