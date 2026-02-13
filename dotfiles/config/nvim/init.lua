@@ -420,6 +420,7 @@ require('lazy').setup({
   {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
+    version = '2.6.0',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       -- Mason must be loaded before its dependents so we need to set it up here.
@@ -612,7 +613,7 @@ require('lazy').setup({
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
-        -- rust_analyzer = {},
+        rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -718,70 +719,60 @@ require('lazy').setup({
   { -- Autocompletion
     'saghen/blink.cmp',
     event = 'VimEnter',
-    version = '1.*',
+    version = '1.9.1',
     dependencies = {
-      -- Snippet Engine
+      -- Snippet Engine:
       {
         'L3MON4D3/LuaSnip',
-        version = '2.*',
-        build = (function()
-          -- Build Step is needed for regex support in snippets.
-          -- This step is not supported in many windows environments.
-          -- Remove the below condition to re-enable on windows.
-          if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
-            return
-          end
-          return 'make install_jsregexp'
-        end)(),
+        version = '2.4.1',
+        build = 'make install_jsregexp',
         dependencies = {
           -- `friendly-snippets` contains a variety of premade snippets.
-          --    See the README about individual language/framework/plugin snippets:
-          --    https://github.com/rafamadriz/friendly-snippets
-          -- {
-          --   'rafamadriz/friendly-snippets',
-          --   config = function()
-          --     require('luasnip.loaders.from_vscode').lazy_load()
-          --   end,
-          -- },
+          {
+            'rafamadriz/friendly-snippets',
+            config = function()
+              require('luasnip.loaders.from_vscode').lazy_load()
+            end,
+          },
         },
         opts = {},
       },
-      'folke/lazydev.nvim',
+      {
+        -- for Lua language server:
+        'folke/lazydev.nvim',
+        version = '1.10.0',
+      },
     },
     --- @module 'blink.cmp'
     --- @type blink.cmp.Config
     opts = {
+      -- 'default' (recommended) for mappings similar to built-in completions
+      --   <c-y> to accept ([y]es) the completion.
+      --    This will auto-import if your LSP supports it.
+      --    This will expand snippets if the LSP sent a snippet.
+      -- 'super-tab' for tab to accept
+      -- 'enter', for enter to accept
+      -- 'none' for no mappings
+      --
+      -- For an understanding of why the 'default' preset is recommended,
+      -- you will need to read `:help ins-completion`
+      --
+      -- No, but seriously. Please read `:help ins-completion`, it is really good!
+      --
+      -- All presets have the following mappings:
+      -- <tab>/<s-tab>: move to right/left of your snippet expansion
+      -- <c-space>: Open menu or open docs if already open
+      -- <c-n>/<c-p> or <up>/<down>: Select next/previous item
+      -- <c-e>: Hide menu
+      -- <c-k>: Toggle signature help
+      --
+      -- See :h blink-cmp-config-keymap for defining your own keymap
       keymap = {
-        -- 'default' (recommended) for mappings similar to built-in completions
-        --   <c-y> to accept ([y]es) the completion.
-        --    This will auto-import if your LSP supports it.
-        --    This will expand snippets if the LSP sent a snippet.
-        -- 'super-tab' for tab to accept
-        -- 'enter' for enter to accept
-        -- 'none' for no mappings
-        --
-        -- For an understanding of why the 'default' preset is recommended,
-        -- you will need to read `:help ins-completion`
-        --
-        -- No, but seriously. Please read `:help ins-completion`, it is really good!
-        --
-        -- All presets have the following mappings:
-        -- <tab>/<s-tab>: move to right/left of your snippet expansion
-        -- <c-space>: Open menu or open docs if already open
-        -- <c-n>/<c-p> or <up>/<down>: Select next/previous item
-        -- <c-e>: Hide menu
-        -- <c-k>: Toggle signature help
-        --
-        -- See :h blink-cmp-config-keymap for defining your own keymap
         preset = 'default',
-
-        -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-        --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
       },
 
       appearance = {
         -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-        -- Adjusts spacing to ensure icons are aligned
         nerd_font_variant = 'mono',
       },
 
@@ -792,7 +783,7 @@ require('lazy').setup({
       },
 
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'lazydev' },
+        default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
         providers = {
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
         },
@@ -807,7 +798,7 @@ require('lazy').setup({
       -- the rust implementation via `'prefer_rust_with_warning'`
       --
       -- See :h blink-cmp-config-fuzzy for more information
-      fuzzy = { implementation = 'lua' },
+      fuzzy = { implementation = 'prefer_rust_with_warning' },
 
       -- Shows a signature help window while you type arguments for a function
       signature = { enabled = true },
@@ -904,6 +895,7 @@ require('lazy').setup({
 
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
+    version = '0.17.0',
     config = function()
       -- Better Around/Inside textobjects
       --
@@ -921,10 +913,7 @@ require('lazy').setup({
       require('mini.surround').setup()
 
       -- Simple and easy statusline.
-      --  You could remove this setup call if you don't like it,
-      --  and try some other statusline plugin
       local statusline = require 'mini.statusline'
-      -- set use_icons to true if you have a Nerd Font
       statusline.setup { use_icons = vim.g.have_nerd_font }
 
       -- You can configure sections in the statusline by overriding their
@@ -935,8 +924,14 @@ require('lazy').setup({
         return '%2l:%-2v'
       end
 
-      -- ... and there is more!
-      --  Check out: https://github.com/echasnovski/mini.nvim
+      -- Minimal and fast tabline showing listed buffers
+      require('mini.tabline').setup()
+
+      -- Highlight trail spaces
+      require('mini.trailspace').setup()
+
+      -- pop up completion menu in command line:
+      require('mini.cmdline').setup()
     end,
   },
   { -- Highlight, edit, and navigate code
@@ -1048,7 +1043,7 @@ require('lazy').setup({
     opts = {},
     keys = {
       {
-        '<leader>fp',
+        '<leader>p',
         function()
           require('telescope').extensions.yank_history.yank_history {}
         end,
@@ -1294,6 +1289,38 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end,
 })
 -------------------------------------------------------------------------------
+--- This function converts the following string:
+-- * https://url/5728166 [XY][PROG] Test / Some issue
+-- to MD acceptable URL:
+-- * [\[XY\]\[PROG\] Test / Some issue](https://url/5728166)
+local function convert_bug_link()
+  -- Get the current line number and line content
+  local row = unpack(vim.api.nvim_win_get_cursor(0))
+  local line = vim.api.nvim_get_current_line()
+
+  -- Define the pattern to capture the URL and the Description
+  -- Pattern explanation:
+  -- ^%*%s+          : Starts with * followed by whitespace
+  -- (https://%S+)   : Capture group 1: The URL (non-whitespace characters)
+  -- %s+             : Separator whitespace
+  -- (.*)            : Capture group 2: The rest of the string (Description)
+  local pattern = '^%*%s+(https://%S+)%s+(.*)'
+  local url, desc = line:match(pattern)
+
+  if url and desc then
+    -- Escape brackets: replace '[' with '\[' and ']' with '\]'
+    -- Note: We use "\\[" in Lua to create a single literal backslash string
+    desc = desc:gsub('%[', '\\[')
+    desc = desc:gsub('%]', '\\]')
+    local new_line = string.format('* [%s](%s)', desc, url)
+    vim.api.nvim_buf_set_lines(0, row - 1, row, false, { new_line })
+    print 'Converted bug link!'
+  else
+    print 'No matching bug link pattern found on this line.'
+  end
+end
+vim.api.nvim_create_user_command('ConvertBugLink', convert_bug_link, {})
+-------------------------------------------------------------------------------
 --- Key bindings that depend on plugins
 -- Toggle comment for the current line or with count
 vim.keymap.set('n', '<leader>/', function()
@@ -1323,4 +1350,5 @@ vim.keymap.set('n', '<leader>rr', '<cmd>w | split | terminal cargo run<cr>', { d
 vim.keymap.set('n', '<leader>rn', function()
   vim.diagnostic.jump { count = 1, float = true }
 end, { desc = 'Rust - Show Next Diagnostic' })
+vim.keymap.set('n', '<leader>cl', convert_bug_link, { desc = 'Convert Bug Link to Markdown URL' })
 -------------------------------------------------------------------------------
