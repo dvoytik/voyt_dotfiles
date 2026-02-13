@@ -1,0 +1,15 @@
+# Each output profile is delimited by brackets. It contains several output
+# directives (whose syntax is similar to sway-output(5)). A profile will be
+# enabled if all of the listed outputs are connected.
+
+profile {
+	# output LVDS-1 disable
+	# output "Some Company ASDF 4242" mode 1600x900 position 0,0
+	# name can be retrieved by: swaymsg -t get_outputs
+	output HDMI-A-1 position 0,0 scale 1.0
+	output eDP-1 position 3840,1080 scale 2.0
+}
+
+profile {
+	output eDP-1 position 0,0 scale 2.0
+}

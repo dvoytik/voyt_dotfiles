@@ -281,6 +281,7 @@ function setup_git() {
 }
 
 function install_sway() {
+  # kanshi - remembers monitor position on hot-plug, unplug
   sudo pacman -Syu \
     sway \
     swayidle \
@@ -291,7 +292,8 @@ function install_sway() {
     waybar \
     mako \
     slurp \
-    grim
+    grim \
+    kanshi
   # pulseaudio-utils \
   # waylock \
 }
