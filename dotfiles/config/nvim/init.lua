@@ -196,7 +196,6 @@ require('lazy').setup({
   --    }
   --
   -----------------------------------------------------------------------------
-
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
   -- This is often very useful to both group configuration, as well as handle
@@ -210,12 +209,13 @@ require('lazy').setup({
   --
   -- Then, because we use the `opts` key (recommended), the configuration runs
   -- after the plugin has been loaded as `require(MODULE).setup(opts)`.
-
+  -----------------------------------------------------------------------------
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     version = '3.17.0',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     opts = {
+      preset = 'helix',
       -- delay between pressing a key and opening which-key (milliseconds)
       -- this setting is independent of vim.o.timeoutlen
       delay = 200,
@@ -873,7 +873,7 @@ require('lazy').setup({
   {
     -- Neo-tree is a Neovim plugin to browse the file system
     'nvim-neo-tree/neo-tree.nvim',
-    version = '*',
+    version = '3.39',
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
@@ -912,6 +912,7 @@ require('lazy').setup({
   {
     -- The yanky.nvim stores copied text in a ring buffer
     'gbprod/yanky.nvim',
+    version = '2.0.0',
     opts = {},
     keys = {
       {
@@ -945,6 +946,7 @@ require('lazy').setup({
   {
     -- Debugging plugin
     'mfussenegger/nvim-dap',
+    version = '0.10.0',
     lazy = true,
     dependencies = {
       -- Creates a beautiful debugger UI
