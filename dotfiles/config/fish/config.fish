@@ -3,6 +3,8 @@
 if status is-interactive
 # Commands to run in interactive sessions can go here
 
+set --global fish_color_autosuggestion C0C0C0
+
 # execute sway on the first virtual terminal
 set TTY1 (tty)
 if test "$TTY1" = "/dev/tty1"

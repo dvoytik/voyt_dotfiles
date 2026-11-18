@@ -108,6 +108,7 @@ vim.diagnostic.config {
 vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic Quickfix list' })
 
 -- The <Cmd> pseudokey begins a "command mapping", which executes the command directly without changing modes.
+vim.keymap.set({ 'n', 'v' }, '<leader>c', '<Cmd>bdelete<CR>', { desc = '[C]lose (delete) buffer' })
 vim.keymap.set({ 'n', 'v' }, '<leader>q', '<Cmd>q<CR>', { desc = '[Q]uit window' })
 vim.keymap.set({ 'n', 'v' }, '<leader>w', '<Cmd>w<CR>', { desc = '[W]rite the buffer to the current file' })
 
@@ -231,7 +232,7 @@ require('lazy').setup({
         { '<leader>t', group = '[T]oggle' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
         { '<leader>r', group = 'Rust', mode = { 'n', 'v' } },
-        { '<leader>c', group = '[C]ustom', mode = { 'n', 'v' } },
+        { '<leader>C', group = '[C]ustom comands', mode = { 'n', 'v' } },
       },
     },
   },
@@ -829,6 +830,8 @@ require('lazy').setup({
 
       require('mini.comment').setup()
 
+      -- require('mini.bufremove').setup()
+
       -- TODO: check out: mini.git
     end,
   },
@@ -1194,7 +1197,7 @@ vim.keymap.set('n', '<leader>x', '<Cmd>w | split | terminal ./tests/smoke_test.s
 vim.keymap.set('n', '<leader>rt', '<cmd>w | split | terminal cargo test --workspace<cr>', { desc = 'Rust - cargo test' })
 vim.keymap.set('n', '<leader>rr', '<cmd>w | split | terminal cargo run<cr>', { desc = 'Rust - cargo run' })
 vim.keymap.set('n', '<leader>rn', function() vim.diagnostic.jump { count = 1, float = true } end, { desc = 'Rust - Show Next Diagnostic' })
-vim.keymap.set('n', '<leader>cl', convert_bug_link, { desc = 'Convert Bug Link to Markdown URL' })
+vim.keymap.set('n', '<leader>Cl', convert_bug_link, { desc = 'Convert Bug Link to Markdown URL' })
 -------------------------------------------------------------------------------
 vim.lsp.config('rust_analyzer', {
   settings = {

@@ -41,10 +41,12 @@
     dc = diff --cached
 
 [sendemail]
-    #smtpserver = smtp.gmail.com
-    #smtpuser = voytikd@gmail.com
+    smtpserver = smtp.gmail.com
+    smtpuser = voytikd@gmail.com
     #smtppass = ""
     smtpssl = true
+    smtpServerPort = 587
+    smtpEncryption = tls
     # hack to replace from
     #from = voytikd@gmail.com
 

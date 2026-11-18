@@ -1,0 +1,41 @@
+alias: Thermostats to 22° in the morning with solar power
+description: >-
+  Set all thermostats to 22 °C when the sun is up, solar produces power and
+  battery > 25%
+triggers:
+  - trigger: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    above: 5
+  - trigger: numeric_state
+    entity_id: sensor.ss_pv_power
+    above: 500
+    for:
+      minutes: 10
+  - trigger: numeric_state
+    entity_id: sensor.ss_battery_1_soc
+    above: 25
+conditions:
+  - condition: time
+    after: '08:00:00'
+    before: '12:00:00'
+  - condition: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    above: 5
+  - condition: numeric_state
+    entity_id: sensor.ss_pv_power
+    above: 500
+  - condition: numeric_state
+    entity_id: sensor.ss_battery_1_soc
+    above: 25
+  - condition: template
+    value_template: |
+      {{ this.attributes.last_triggered is none
+         or this.attributes.last_triggered.date() != now().date() }}
+actions:
+  - action: climate.set_temperature
+    target:
+      entity_id: climate.all_thermostats
+    data:
+      temperature: 22

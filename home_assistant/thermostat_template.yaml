@@ -1,0 +1,252 @@
+# Template climate entities that wrap existing thermostats and expose only
+# heat/off modes and a single target temperature. Fan, preset, swing,
+# humidity and low/high range controls of the real devices are not exposed.
+#
+# Include from configuration.yaml with:
+#   template: !include thermostat_template.yaml
+# or paste the list below under an existing `template:` key.
+#
+# Each block reads one real thermostat. The target temperature
+# uses the device's `temperature` attribute, or `target_temp_low` for devices
+# that don't support a single target temperature (supported_features bit 1)
+# and only accept a low/high range.
+
+- climate:
+    - name: "Thermostat Living Room"
+      unique_id: thermostat_living_room
+      availability: "{{ states('climate.therm_eg') not in ['unavailable', 'unknown'] }}"
+      hvac_modes: "{{ ['off', 'heat'] }}"
+      hvac_mode: >
+        {% set mode = states('climate.therm_eg') %}
+        {{ mode if mode in ['off', 'heat'] else none }}
+      hvac_action: >
+        {% set action = state_attr('climate.therm_eg', 'hvac_action') %}
+        {{ action if action in ['off', 'idle', 'heating'] else none }}
+      current_temperature: "{{ state_attr('climate.therm_eg', 'current_temperature') }}"
+      target_temperature: >
+        {% if state_attr('climate.therm_eg', 'supported_features') | int(0) | bitwise_and(1) %}
+          {{ state_attr('climate.therm_eg', 'temperature') }}
+        {% else %}
+          {{ state_attr('climate.therm_eg', 'target_temp_low') }}
+        {% endif %}
+      min_temperature: 5
+      max_temperature: 30
+      target_temperature_step: 0.5
+      precision: 0.1
+      set_hvac_mode:
+        - action: climate.set_hvac_mode
+          target:
+            entity_id: climate.therm_eg
+          data:
+            hvac_mode: "{{ hvac_mode }}"
+      set_temperature:
+        - if:
+            - condition: template
+              value_template: "{{ state_attr('climate.therm_eg', 'supported_features') | int(0) | bitwise_and(1) == 0 }}"
+          then:
+            - action: climate.set_temperature
+              target:
+                entity_id: climate.therm_eg
+              data:
+                target_temp_low: "{{ temperature }}"
+                target_temp_high: "{{ [state_attr('climate.therm_eg', 'target_temp_high') | float(30), temperature | float] | max }}"
+          else:
+            - action: climate.set_temperature
+              target:
+                entity_id: climate.therm_eg
+              data:
+                temperature: "{{ temperature }}"
+
+    - name: "Thermostat Sofia"
+      unique_id: thermostat_sofia
+      availability: "{{ states('climate.therm_sofia') not in ['unavailable', 'unknown'] }}"
+      hvac_modes: "{{ ['off', 'heat'] }}"
+      hvac_mode: >
+        {% set mode = states('climate.therm_sofia') %}
+        {{ mode if mode in ['off', 'heat'] else none }}
+      hvac_action: >
+        {% set action = state_attr('climate.therm_sofia', 'hvac_action') %}
+        {{ action if action in ['off', 'idle', 'heating'] else none }}
+      current_temperature: "{{ state_attr('climate.therm_sofia', 'current_temperature') }}"
+      target_temperature: >
+        {% if state_attr('climate.therm_sofia', 'supported_features') | int(0) | bitwise_and(1) %}
+          {{ state_attr('climate.therm_sofia', 'temperature') }}
+        {% else %}
+          {{ state_attr('climate.therm_sofia', 'target_temp_low') }}
+        {% endif %}
+      min_temperature: 5
+      max_temperature: 30
+      target_temperature_step: 0.5
+      precision: 0.1
+      set_hvac_mode:
+        - action: climate.set_hvac_mode
+          target:
+            entity_id: climate.therm_sofia
+          data:
+            hvac_mode: "{{ hvac_mode }}"
+      set_temperature:
+        - if:
+            - condition: template
+              value_template: "{{ state_attr('climate.therm_sofia', 'supported_features') | int(0) | bitwise_and(1) == 0 }}"
+          then:
+            - action: climate.set_temperature
+              target:
+                entity_id: climate.therm_sofia
+              data:
+                target_temp_low: "{{ temperature }}"
+                target_temp_high: "{{ [state_attr('climate.therm_sofia', 'target_temp_high') | float(30), temperature | float] | max }}"
+          else:
+            - action: climate.set_temperature
+              target:
+                entity_id: climate.therm_sofia
+              data:
+                temperature: "{{ temperature }}"
+
+    - name: "Thermostat Daria"
+      unique_id: thermostat_daria
+      availability: "{{ states('climate.therm_daria') not in ['unavailable', 'unknown'] }}"
+      hvac_modes: "{{ ['off', 'heat'] }}"
+      hvac_mode: >
+        {% set mode = states('climate.therm_daria') %}
+        {{ mode if mode in ['off', 'heat'] else none }}
+      hvac_action: >
+        {% set action = state_attr('climate.therm_daria', 'hvac_action') %}
+        {{ action if action in ['off', 'idle', 'heating'] else none }}
+      current_temperature: "{{ state_attr('climate.therm_daria', 'current_temperature') }}"
+      target_temperature: >
+        {% if state_attr('climate.therm_daria', 'supported_features') | int(0) | bitwise_and(1) %}
+          {{ state_attr('climate.therm_daria', 'temperature') }}
+        {% else %}
+          {{ state_attr('climate.therm_daria', 'target_temp_low') }}
+        {% endif %}
+      min_temperature: 5
+      max_temperature: 30
+      target_temperature_step: 0.5
+      precision: 0.1
+      set_hvac_mode:
+        - action: climate.set_hvac_mode
+          target:
+            entity_id: climate.therm_daria
+          data:
+            hvac_mode: "{{ hvac_mode }}"
+      set_temperature:
+        - if:
+            - condition: template
+              value_template: "{{ state_attr('climate.therm_daria', 'supported_features') | int(0) | bitwise_and(1) == 0 }}"
+          then:
+            - action: climate.set_temperature
+              target:
+                entity_id: climate.therm_daria
+              data:
+                target_temp_low: "{{ temperature }}"
+                target_temp_high: "{{ [state_attr('climate.therm_daria', 'target_temp_high') | float(30), temperature | float] | max }}"
+          else:
+            - action: climate.set_temperature
+              target:
+                entity_id: climate.therm_daria
+              data:
+                temperature: "{{ temperature }}"
+
+    - name: "Thermostat Parents"
+      unique_id: thermostat_parents
+      availability: "{{ states('climate.therm_parents') not in ['unavailable', 'unknown'] }}"
+      hvac_modes: "{{ ['off', 'heat'] }}"
+      hvac_mode: >
+        {% set mode = states('climate.therm_parents') %}
+        {{ mode if mode in ['off', 'heat'] else none }}
+      hvac_action: >
+        {% set action = state_attr('climate.therm_parents', 'hvac_action') %}
+        {{ action if action in ['off', 'idle', 'heating'] else none }}
+      current_temperature: "{{ state_attr('climate.therm_parents', 'current_temperature') }}"
+      target_temperature: >
+        {% if state_attr('climate.therm_parents', 'supported_features') | int(0) | bitwise_and(1) %}
+          {{ state_attr('climate.therm_parents', 'temperature') }}
+        {% else %}
+          {{ state_attr('climate.therm_parents', 'target_temp_low') }}
+        {% endif %}
+      min_temperature: 5
+      max_temperature: 30
+      target_temperature_step: 0.5
+      precision: 0.1
+      set_hvac_mode:
+        - action: climate.set_hvac_mode
+          target:
+            entity_id: climate.therm_parents
+          data:
+            hvac_mode: "{{ hvac_mode }}"
+      set_temperature:
+        - if:
+            - condition: template
+              value_template: "{{ state_attr('climate.therm_parents', 'supported_features') | int(0) | bitwise_and(1) == 0 }}"
+          then:
+            - action: climate.set_temperature
+              target:
+                entity_id: climate.therm_parents
+              data:
+                target_temp_low: "{{ temperature }}"
+                target_temp_high: "{{ [state_attr('climate.therm_parents', 'target_temp_high') | float(30), temperature | float] | max }}"
+          else:
+            - action: climate.set_temperature
+              target:
+                entity_id: climate.therm_parents
+              data:
+                temperature: "{{ temperature }}"
+
+
+    # Controls all real thermostats at once. Mode is "heat" if any thermostat
+    # heats; temperatures are averages over the available thermostats.
+    - name: "All thermostats"
+      unique_id: all_thermostats
+      availability: "{{ ['climate.therm_eg', 'climate.therm_sofia', 'climate.therm_daria', 'climate.therm_parents'] | select('has_value') | list | count > 0 }}"
+      hvac_modes: "{{ ['off', 'heat'] }}"
+      hvac_mode: >
+        {% set modes = expand(['climate.therm_eg', 'climate.therm_sofia', 'climate.therm_daria', 'climate.therm_parents']) | map(attribute='state') | list %}
+        {{ 'heat' if 'heat' in modes else 'off' if 'off' in modes else none }}
+      hvac_action: >
+        {% set actions = expand(['climate.therm_eg', 'climate.therm_sofia', 'climate.therm_daria', 'climate.therm_parents']) | map(attribute='attributes.hvac_action') | list %}
+        {% if 'heating' in actions %}heating
+        {% elif 'idle' in actions %}idle
+        {% elif 'off' in actions %}off
+        {% else %}{{ none }}{% endif %}
+      current_temperature: >
+        {% set t = expand(['climate.therm_eg', 'climate.therm_sofia', 'climate.therm_daria', 'climate.therm_parents']) | map(attribute='attributes.current_temperature') | select('is_number') | list %}
+        {{ (t | sum / t | count) | round(1) if t else none }}
+      target_temperature: >
+        {% set ns = namespace(t=[]) %}
+        {% for s in expand(['climate.therm_eg', 'climate.therm_sofia', 'climate.therm_daria', 'climate.therm_parents']) %}
+          {% set attr = 'temperature' if s.attributes.supported_features | int(0) | bitwise_and(1) else 'target_temp_low' %}
+          {% if s.attributes[attr] is number %}
+            {% set ns.t = ns.t + [s.attributes[attr]] %}
+          {% endif %}
+        {% endfor %}
+        {{ (ns.t | sum / ns.t | count) | round(1) if ns.t else none }}
+      min_temperature: 5
+      max_temperature: 30
+      target_temperature_step: 0.5
+      precision: 0.1
+      set_hvac_mode:
+        - action: climate.set_hvac_mode
+          target:
+            entity_id: "{{ ['climate.therm_eg', 'climate.therm_sofia', 'climate.therm_daria', 'climate.therm_parents'] | select('has_value') | list }}"
+          data:
+            hvac_mode: "{{ hvac_mode }}"
+      set_temperature:
+        - repeat:
+            for_each: "{{ ['climate.therm_eg', 'climate.therm_sofia', 'climate.therm_daria', 'climate.therm_parents'] | select('has_value') | list }}"
+            sequence:
+              - if:
+                  - condition: template
+                    value_template: "{{ state_attr(repeat.item, 'supported_features') | int(0) | bitwise_and(1) == 0 }}"
+                then:
+                  - action: climate.set_temperature
+                    target:
+                      entity_id: "{{ repeat.item }}"
+                    data:
+                      target_temp_low: "{{ temperature }}"
+                      target_temp_high: "{{ [state_attr(repeat.item, 'target_temp_high') | float(30), temperature | float] | max }}"
+                else:
+                  - action: climate.set_temperature
+                    target:
+                      entity_id: "{{ repeat.item }}"
+                    data:
+                      temperature: "{{ temperature }}"

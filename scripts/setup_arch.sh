@@ -65,7 +65,8 @@ function install_user_packages() {
     handlr \
     guvcview \
     zathura zathura-pdf-mupdf \
-    bottom
+    bottom \
+    cliphist
     #ncal \
     #fzf \
     #gdu \
@@ -330,18 +331,6 @@ function install_screenshot_tools() {
   sudo pacman -S swappy
 }
 
-# cliboard history
-function install_clapboard() {
-  # pushd /tmp
-  # git clone https://github.com/bjesus/clapboard.git
-  # pushd clapboard
-  # cargo build --release
-  # sudo cp target/release/clapboard /usr/local/bin/
-  paru -S clapboard-git
-
-  ln -s $PWD/dotfiles/clapboard ~/.config/clapboard
-}
-
 # setup audio: pipewire, wireplumber
 function setup_pipewire() {
   # add user to audio group
@@ -517,7 +506,6 @@ function setup_i3() {
 #install_setup_wezterm
 #install_lazygit
 #install_swappy
-#install_clapboard
 #setup_pipewire
 #disk_encryption
 #setup_grub

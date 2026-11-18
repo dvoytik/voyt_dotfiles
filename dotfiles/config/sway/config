@@ -281,10 +281,10 @@ bindsym $mod+Ctrl+n exec makoctl dismiss -a
 for_window [app_id="^chrome-.*"] shortcuts_inhibitor disable
 for_window [app_id="^brave-.*"] shortcuts_inhibitor disable
 ####################################################################################################
-# Clapboard - remember clipboard
+# Clipboard history
 # sit in background and store copied text
-exec clapboard --record clipboard
-bindsym $mod+c exec clapboard
+exec wl-paste --watch cliphist store
+bindsym $mod+c exec cliphist list | wofi -S dmenu | cliphist decode | wl-copy
 ####################################################################################################
 # bindsym $mod+x exec warpd --hint
 # bindsym $mod+c exec warpd --normal

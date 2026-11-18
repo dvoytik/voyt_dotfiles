@@ -1,0 +1,142 @@
+views:
+  - type: sections
+    sections:
+      - type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: binary_sensor.sensor_door_main_contact
+                type: custom:multiple-entity-row
+                name: Main door
+                color: red
+                secondary_info: last-changed
+              - entity: binary_sensor.sensor_window_west1_contact
+                type: custom:multiple-entity-row
+                name: West window
+                color: red
+                secondary_info: last-changed
+              - entity: binary_sensor.sensor_window_basement_contact
+                type: custom:multiple-entity-row
+                name: Basement window
+                color: red
+                secondary_info: last-changed
+              - type: section
+              - entity: sensor.therm_eg_local_temperature
+                type: custom:multiple-entity-row
+                name: Living Room
+                state_header: Current
+                entities:
+                  - entity: sensor.therm_eg_humidity
+                    name: Humidity
+                  - entity: climate.therm_eg
+                    name: State
+                    template: >-
+                      {{ state_attr("climate.therm_eg", "hvac_action")
+                      }}
+                  - entity: climate.therm_eg
+                    name: Target
+                    template: '{{ state_attr("climate.therm_eg", "target_temp_low") }}°C'
+              - entity: sensor.therm_sofia_local_temperature
+                type: custom:multiple-entity-row
+                name: Sofia
+                entities:
+                  - entity: sensor.therm_sofia_humidity
+                    name: " "
+                  - entity: climate.therm_sofia
+                    name: " "
+                    template: >-
+                      {{ state_attr("climate.therm_sofia", "hvac_action")
+                      }}
+                  - entity: climate.therm_sofia
+                    name: " "
+                    template: >-
+                      {{ state_attr("climate.therm_sofia", "target_temp_low")
+                      }}°C
+              - entity: sensor.therm_daria_local_temperature
+                type: custom:multiple-entity-row
+                name: Daria
+                entities:
+                  - entity: sensor.therm_daria_humidity
+                    name: " "
+                  - entity: climate.therm_daria
+                    name: " "
+                    template: >-
+                      {{ state_attr("climate.therm_daria", "hvac_action")
+                      }}
+                  - entity: climate.therm_daria
+                    name: " "
+                    template: >-
+                      {{ state_attr("climate.therm_daria", "target_temp_low")
+                      }}°C
+              - entity: sensor.therm_parents_local_temperature
+                type: custom:multiple-entity-row
+                name: Parents
+                entities:
+                  - entity: sensor.therm_parents_humidity
+                    name: " "
+                  - entity: climate.therm_parents
+                    name: " "
+                    template: >-
+                      {{ state_attr("climate.therm_parents", "hvac_action")
+                      }}
+                  - entity: climate.therm_parents
+                    name: " "
+                    template: >-
+                      {{ state_attr("climate.therm_parents", "target_temp_low")
+                      }}°C
+              - type: section
+              - entity: weather.home
+                show_entity_picture: true
+                state_content:
+                  - temperature
+                  - state
+                  - last_updated
+                vertical: false
+                features_position: bottom
+                grid_options:
+                  columns: 9
+                  rows: 1
+              - type: section
+              - entity: sensor.ss_pv_power
+                type: custom:multiple-entity-row
+                name: Solar
+                state_header: Current
+                format: kilo, precision3
+                unit: kW
+                features_position: bottom
+                icon: mdi:sun-angle
+                styles:
+                  text-align: left
+                entities:
+                  - entity: sensor.ss_day_pv_energy
+                    name: Today
+                    unit: kW
+              - entity: sensor.ss_load_power
+                type: custom:multiple-entity-row
+                name: Energy Load
+                features_position: bottom
+                state_header: Load
+                format: kilo, precision3
+                unit: kW
+                icon: mdi:power-plug-outline
+                styles:
+                  text-align: left
+                entities:
+                  - entity: sensor.ss_day_load_energy
+                    name: Today
+                    unit: kW
+              - entity: sensor.ss_grid_power
+                type: custom:multiple-entity-row
+                name: Grid
+                features_position: bottom
+                state_header: Import
+                format: kilo, precision3
+                unit: kW
+                icon: mdi:import
+                styles:
+                  text-align: left
+                entities:
+                  - entity: sensor.ss_day_grid_import
+                    name: Today
+                    unit: kW
+              - type: section

@@ -1,0 +1,130 @@
+# ==============================================================================
+# NeoMutt Configuration for Local mbox Storage
+# ==============================================================================
+
+# --- Mailbox Paths ---
+set folder    = "~/Mail"                 # Top-level mail folder
+set mbox_type = mbox                     # Default mailbox format
+set spoolfile = "+inbox"                 # Default inbox
+set record    = "+sent"                  # Where sent mail goes
+set postponed = "+drafts"                # Where drafts are saved
+set trash     = "+trash"                 # Where deleted mail goes
+
+# --- Sidebar Configuration ---
+# Shows your local mbox files in a sidebar panel on the left
+set sidebar_visible = yes
+set sidebar_width   = 24
+set sidebar_format  = "%B%?F? [%F]?%* %?N?%N/?"
+
+# Automatically list all mbox files inside ~/Mail in the sidebar
+#mailboxes ~/Mail/*
+#mailboxes +inbox +sent +drafts +lkml/netdev +lkml/kernel
+mailboxes +lkml
+
+# --- Email Rendering & LKML / Patch Compatibility ---
+set mailcap_path  = ~/.config/neomutt/mailcap:~/.mailcap
+set implicit_autoview = yes
+auto_view text/html                       # Fallback render HTML to text if needed
+set preferred_languages = "en"
+
+# Strict plain-text options for viewing patches cleanly
+set text_flowed = no                      # Do not format text/plain flowed (preserves patch layout)
+set display_filter = ""                   # Keep patch headers clean
+
+# --- General UI Settings ---
+set sort = threads                        # Thread view (essential for mailing lists)
+set sort_aux = date-received
+set date_format = "!%Y-%m-%d %H:%M"
+set index_format = "%4C %Z %{%b %d} %-15.15L (%?l?%l&%c?) %s"
+
+# ==============================================================================
+# Split-Screen (Index on top, Pager on bottom)
+# ==============================================================================
+
+# Number of lines to show for the index/message list at the top when reading a message
+set pager_index_lines = 10
+
+# Show the index on top when the pager (message view) is active
+set pager_context = 3             # Number of context lines when scrolling in pager
+
+# ==============================================================================
+# Keybindings
+# ==============================================================================
+# Disable mouse scroll wheel
+unbind index,pager <ScrollUp>
+unbind index,pager <ScrollDown>
+unbind index,pager <Button4>
+unbind index,pager <Button5>
+unbind pager,pager <Button4>
+unbind pager <Button5>
+unbind attach <Button4>
+unbind attach <Button5>
+set pager_stop = yes
+
+# --- Keyboard Shortcuts ---
+bind index,pager \Ck sidebar-prev         # Ctrl+k to move up in sidebar
+bind index,pager \Cj sidebar-next         # Ctrl+j to move down in sidebar
+bind index,pager \Co sidebar-open         # Ctrl+o to open highlighted folder
+# Line-by-line scrolling through the text of the open email
+bind pager j next-line        # 'j' scrolls text down one line
+bind pager k previous-line    # 'k' scrolls text up one line
+bind index,pager \Cf next-page      # Control+f
+bind index,pager \Cb previous-page
+
+# Move to Next/Previous message using Shift+J / Shift+K or Down/Up arrows
+bind pager J next-entry       # 'J' moves to the next message
+bind pager K previous-entry   # 'K' moves to the previous message
+
+macro pager I "<enter-command>unignore Message-ID<enter><redraw-screen>" "Show Message-ID"
+
+# Press Shift+E in index or pager view to view the raw message in $EDITOR
+macro index,pager E "<pipe-message>${EDITOR} -<enter>" "View message in $EDITOR"
+
+# ==============================================================================
+# Color Scheme Configuration
+# ==============================================================================
+
+# System/Basic Colors (Object, Foreground, Background)
+color normal        default default
+color error         red     default
+color indicator     brightwhite color237     # Highlighted line in index
+color status        brightwhite color235     # Status bar at the bottom
+color message       brightgreen default
+color signature     color244 default
+
+# Index List View
+color index         brightgreen default  "~N" # New / Unread messages
+color index         red         default  "~F" # Flagged messages
+color index         blue        default  "~D" # Deleted messages
+color index_author  cyan        default       # Author name
+color index_subject brightwhite default       # Subject line
+
+# Sidebar Colors
+color sidebar_flagged red       default
+color sidebar_new     brightgreen default
+color sidebar_divider color237  default
+color sidebar_highlight default color237
+
+# Header Colors (Message Pager)
+color header        brightcyan  default  "^From:"
+color header        brightyellow default "^Subject:"
+color header        brightgreen default  "^Date:"
+color header        cyan        default  "^To:"
+color header        cyan        default  "^Cc:"
+
+# Body Formatting & Links
+color body          brightyellow default "(https?|ftp)://[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)" # URLs
+color body          brightblue   default "^>.*"                       # Quoted text level 1
+color body          magenta      default "^> >.*"                     # Quoted text level 2
+color body          green        default "^> > >.*"                   # Quoted text level 3
+
+# Patch / Diff Syntax Highlighting (Crucial for LKML)
+color body          brightwhite  default "^diff --git.*"
+color body          brightwhite  default "^index .*"
+color body          brightblue   default "^---.*"
+color body          brightblue   default "^\\+\\+\\+.*"
+color body          brightgreen  default "^\\+.*"                     # Added lines in patch
+color body          brightred    default "^-.*"                     # Removed lines in patch
+color body          brightcyan   default "^@@.*"                    # Hunk headers
+
+color index_author magenta default "~f \"torvalds|gregkh|tglx|rostedt|akpm|sashal|corbet|skhan|rdunlap|dakr|ojeda|broonie|mchehab|shevchenko|mingo|torokhov|peterz|hch|axboe|david@kernel.org|vbabka|brauner\""

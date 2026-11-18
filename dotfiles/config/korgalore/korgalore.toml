@@ -1,0 +1,12 @@
+[targets.local]
+type = 'maildir'
+path = '~/Mail/lkml'
+
+[deliveries.lkml]
+feed = 'lkml'
+target = 'local'
+# subfolder = 'Lists/LKML'  # Results in ~/Mail/Lists/LKML
+
+[feeds.lkml]
+url = 'https://lore.kernel.org/lkml/'
+
